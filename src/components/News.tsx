@@ -1,6 +1,9 @@
 import React, { FC, useState, useEffect, useRef, MouseEvent } from 'react'
 import styled, { StyledComponent } from 'styled-components'
 import NewsImg from '../assets/images/ben-greenwood.jpg'
+import NewsImg2 from '../assets/images/reef-peries.jpg'
+import NewsImg3 from '../assets/images/ben-greenwood-2.jpg'
+import NewsImg4 from '../assets/images/bevan-cross.jpg'
 
 const NewsSection = styled.section`
   padding: 12rem 0 12rem 10rem;
@@ -78,13 +81,13 @@ const News = () => {
 
   const articles = [
     { image: NewsImg, club: 'Chelsea FC', name: 'Ben Greenwood' },
-    { image: NewsImg, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
-    { image: NewsImg, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
-    { image: NewsImg, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
+    { image: NewsImg2, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
+    { image: NewsImg3, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
+    { image: NewsImg4, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
     { image: NewsImg, club: 'Chelsea FC', name: 'Ben Greenwood' },
-    { image: NewsImg, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
-    { image: NewsImg, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
-    { image: NewsImg, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
+    { image: NewsImg2, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
+    { image: NewsImg3, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
+    { image: NewsImg4, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
   ];
 
   const [ maskWidth, setMaskWidth ] = useState(0);
