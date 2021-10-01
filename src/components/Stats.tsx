@@ -129,22 +129,22 @@ const Stats: FC = () => {
       <dl>
         <div>
           <div>
-            <Counter text={`Months live testing`} total={7} active={inViewport} time={1400} /> 
+            <Counter text={`Months live testing`} total={7} active={inViewport} time={1050} /> 
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Data points analysed`} total={1.5} increment={.1} postfix={`M+`} active={inViewport} time={1400} /> 
+          <Counter text={`Data points analysed`} total={1.5} increment={.1} postfix={`M+`} active={inViewport} time={1050} /> 
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Players analysed in-app`} total={19} postfix={`K`} active={inViewport} time={1400} /> 
+          <Counter text={`Players analysed in-app`} total={19} postfix={`K`} active={inViewport} time={1050} /> 
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Trailed & signed for pro clubs and selected for national squads`} total={45}  active={inViewport} time={1400} /> 
+          <Counter text={`Trailed & signed for pro clubs and selected for national squads`} total={45}  active={inViewport} time={1050} /> 
           </div>
         </div>
       </dl>
