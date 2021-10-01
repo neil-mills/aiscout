@@ -187,7 +187,6 @@ const News = () => {
         >
           {articles.map((item, index) => {
             return (
-              <>
             <article
               style={{width: `${articleWidth}px`}}
               key={index}
@@ -203,7 +202,6 @@ const News = () => {
                 <p>{item.name}</p>
               </Label>
             </article>
-            </>
             )
 })}
         </Track>
