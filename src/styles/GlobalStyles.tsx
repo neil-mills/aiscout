@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   main {
-    padding-top: 90vh;
+    padding-top: 95vh;
   }
   #content {
     position: relative;

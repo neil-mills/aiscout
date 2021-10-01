@@ -20,7 +20,7 @@ const ImageBannerStyles = styled.section`
   left: 0;
   display: block;
   width: 100%;
-  height: 90vh;
+  height: 95vh;
   z-index: 1;
 `
 
