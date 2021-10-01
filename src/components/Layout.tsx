@@ -18,23 +18,8 @@ import './layout.css'
 export const Layout: FC = ({ children }): JSX.Element => {
 
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const root = document.querySelector('#___gatsby');
   let content:HTMLElement | null = null;
-
-  interface OptionsInterface {
-    root: Element | null;
-    rootMargin?: string | undefined;
-    threshold?: number;
-  }
  
-
-  // const onIntersect = (entries: any) => {
-  //   entries.forEach((entry:any) => {
-  //     console.log(entry);
-  //     console.log('intersected!');
-  //   })
-  // }
-
   const handleOnScroll = () => {
     if(headerRef.current && content) {
       const offset:number = headerRef.current?.offsetHeight;
@@ -48,23 +33,13 @@ export const Layout: FC = ({ children }): JSX.Element => {
 
   useEffect(() => {
     content = document.querySelector('#content')
-    // const options:OptionsInterface = {
-    //   root,
-    //   rootMargin: headerRef.current ? `${headerRef.current.offsetHeight}px` : '',
-    //   threshold: 0
-    // }
     window.addEventListener('scroll', handleOnScroll);
     window.addEventListener('resize', handleOnScroll)
     handleOnScroll()
-   // console.log(content.getBoundingClientRect().top);
     return () => {
       window.removeEventListener('scroll', handleOnScroll);
       window.removeEventListener('resize', handleOnScroll);
     }
-   // console.log('header=',headerRef?.current?.offsetHeight);
-   // console.log('content=', content);
-   // const observer = new IntersectionObserver(onIntersect, options);
-   // observer.observe(content);
   },[]);
 
   return (

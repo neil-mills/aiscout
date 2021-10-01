@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import styled from 'styled-components'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import styled, { StyledComponent } from 'styled-components'
 
 const StatsStyles = styled.section`
   display: flex;
@@ -32,10 +32,9 @@ const StatsStyles = styled.section`
           background-color: var(--light-grey);
         }
       }
-      
+
       &:last-child {
         div {
-          
           &:after {
             display: none;
           }
@@ -55,35 +54,96 @@ const StatsStyles = styled.section`
   }
 `
 
-const Stats: FC = () => {
+interface CounterProps {
+  text: string;
+  total: number;
+  postfix?: string;
+  increment?:number;
+  active: boolean;
+  time: number;
+}
+
+const Counter = ({ text, total, postfix = '', increment = 1, active, time }: CounterProps): JSX.Element => {
+  const [ isActive, setIsActive] = useState<boolean>(false);
+  if(!isActive && active) setIsActive(active);
+  const [count, setCount] = useState<number>(0)
+  const isDecimal:boolean = !Number.isInteger(increment);
+  const steps:number = total / increment;
+  const delay:number = time / steps;
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+        if (count < total && isActive) {
+        setCount(prevCount => prevCount + increment)   
+      }
+      }, delay)
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [count, active])
+
   return (
-    <StatsStyles>
+    <>
+      <dt>{isDecimal && count > 0 ? count.toFixed(1) : count}{postfix}</dt>
+      <dd>{text}</dd>
+    </>
+  )
+}
+
+const Stats: FC = () => {
+  const SectionRef = useRef<HTMLElement>(null)
+  const [inViewport, setInViewport] = useState<boolean>(false)
+
+  const callback = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ): void => {
+    entries.forEach(entry => {
+      setInViewport(entry.isIntersecting)
+      if (entry.isIntersecting) {
+        console.log('stats on screen!')
+      } else {
+        console.log('stats not on screen')
+      }
+    })
+  }
+
+  useEffect(() => {
+    const options = {
+      root: null, // relative to document viewport
+      rootMargin: '0px', // margin around root. Values are similar to css property. Unitless values not allowed
+      threshold: 1, // visible amount of item shown in relation to root
+    }
+    const observer: IntersectionObserver = new IntersectionObserver(
+      callback,
+      options
+    )
+    if (SectionRef.current) {
+      observer.observe(SectionRef.current)
+    }
+  }, [])
+
+  return (
+    <StatsStyles ref={SectionRef} id="stats">
       <dl>
         <div>
           <div>
-            <dt>7</dt>
-            <dd>Months live testing</dd>
+            <Counter text={`Months live testing`} total={7} active={inViewport} time={1400} /> 
           </div>
         </div>
         <div>
           <div>
-            <dt>1.5M+</dt>
-            <dd>Data points analysed</dd>
+          <Counter text={`Data points analysed`} total={1.5} increment={.1} postfix={`M+`} active={inViewport} time={1400} /> 
           </div>
         </div>
         <div>
           <div>
-            <dt>19K</dt>
-            <dd>Players analysed in-app</dd>
+          <Counter text={`Players analysed in-app`} total={19} postfix={`K`} active={inViewport} time={1400} /> 
           </div>
         </div>
         <div>
           <div>
-            <dt>45</dt>
-            <dd>
-              Trailed &amp; signed for pro clubs and selected for national
-              squads
-            </dd>
+          <Counter text={`Trailed & signed for pro clubs and selected for national squads`} total={45}  active={inViewport} time={1400} /> 
           </div>
         </div>
       </dl>
