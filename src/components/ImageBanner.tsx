@@ -1,4 +1,3 @@
-import { Link } from 'gatsby'
 import React, { FC, useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
@@ -6,7 +5,6 @@ import SlideA from '../assets/images/slide-bg.jpg'
 import SlideB from '../assets/images/slide-bg-2.jpg'
 import SlideC from '../assets/images/slide-bg-3.jpg'
 import DownloadNav from './DownloadNav'
-import { callbackify } from 'util'
 
 const DownloadNavStyles = styled(DownloadNav)`
   justify-content: flex-end;
@@ -78,7 +76,6 @@ const SlideCaption = styled.div`
   p {
     margin-bottom: 5rem;
     padding-right: 1rem;
-    
   }
 `
 const SlideNav = styled.div`
@@ -154,6 +151,7 @@ const slides = [
     football clubs, and many other types of footballing
     organisations are utilising to find, trial and develop players
     like you.`,
+    downloadLinks: true,
     button: 'How it works',
   },
   {
@@ -169,13 +167,9 @@ const ImageBanner: FC = () => {
   const slideRefs = useRef(new Array())
   const slideButtonRefs = useRef(new Array())
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [ intervalId, setIntervalId ] = useState();
-  //let timer: ReturnType<typeof setTimeout>;
- 
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>()
 
-  const setActiveSlide = (index:number) => {
-    console.log('set slide index=', index)
-
+  const setActiveSlide = (index: number) => {
     slideRefs.current.forEach(slideRef =>
       slideRef.classList.remove('is-active')
     )
@@ -190,58 +184,51 @@ const ImageBanner: FC = () => {
     })
     slideRefs.current[index].classList.add('is-active')
     slideButtonRefs.current[index].classList.add('is-active')
-   
-    // timer = setTimeout(() => {
-    //   clearTimeout(timer)
-    //   setActiveSlide(nextIndex)
-    // }, 10000)
   }
 
-  //const [ startInterval, clearTimer ] = useInterval(setActiveSlide, 10000);
-  
- 
-
-  const handleClick = (index:number) => {
-    console.log(index);
-    //clearTimer();
-    clearInterval(intervalId);
-   setCurrentIndex(index);
-
-   }
+  const handleClick = (index: number) => {
+    if (intervalId) clearInterval(intervalId)
+    setActiveSlide(index)
+    setCurrentIndex(index)
+  }
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const index:number = currentIndex < slides.length - 1 ? currentIndex + 1 : 0
+      const index: number =
+        currentIndex < slides.length - 1 ? currentIndex + 1 : 0
       setActiveSlide(index)
       setCurrentIndex(index)
-    }, 10000);
-    setIntervalId(timeout);
-    return () => clearTimeout(timeout);
+    }, 10000)
+    setIntervalId(timeout)
+    return () => clearTimeout(timeout)
   }, [currentIndex])
 
   return (
     <ImageBannerStyles>
       <Slides>
-        {slides.map((slide, index:number) => {
-          
+        {slides.map((slide, index: number) => {
           return (
-          <Slide
-            key={index}
-            className={index === 0 ? `is-active` : ``}
-            ref={element => (slideRefs.current[index] = element)}
-          >
-            <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
-              <SlideInner>
-                <SlideCaption>
-                  <h2>{slide.subHeading}</h2>
-                  <h3>{slide.heading}</h3>
-                  <p className={index !== 2 ? `padded` : ``}>{slide.text}</p>
-                  {slide.button && <Button to="">{slide.button}</Button>}
-                </SlideCaption>
-              </SlideInner>
-            </SlideBg>
-          </Slide>
-        )})}
+            <Slide
+              key={index}
+              className={index === 0 ? `is-active` : ``}
+              ref={element => (slideRefs.current[index] = element)}
+            >
+              <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
+                <SlideInner>
+                  <SlideCaption>
+                    <h2>{slide.subHeading}</h2>
+                    <h3>{slide.heading}</h3>
+                    <p className={index !== 2 ? `padded` : ``}>{slide.text}</p>
+                    {slide.button && (
+                      <Button link="/get-started">{slide.button}</Button>
+                    )}
+                  </SlideCaption>
+                  {slide.downloadLinks && <DownloadNavStyles />}
+                </SlideInner>
+              </SlideBg>
+            </Slide>
+          )
+        })}
       </Slides>
       <SlideNav>
         {slides.map((slide, index) => (
@@ -260,33 +247,6 @@ const ImageBanner: FC = () => {
       </SlideNav>
     </ImageBannerStyles>
   )
-       
 }
-
-// export const useInterval = (callback:any, delay:number) => {
-//  // let timeoutId: ReturnType<typeof setTimeout> | null = null;
-//   const [ intervalId, setIntervalId ] = useState();
-//   const savedCallback = useRef();
-
-//   useEffect(() => {
-//     savedCallback.current = callback;
-//   }, [callback])
-
-//   useEffect(() => {
-//     let id = setInterval(() => {
-//       if(savedCallback?.current) {
-//         savedCallback.current();
-//       }
-//     })
-//     setIntervalId(id);
-//   }, [delay])
-//  const clearTimer = () => {
-//    clearInterval(intervalId);
-//  }
-
-
-
-//   return [startInterval, clearTimer]
-// }
 
 export default ImageBanner
