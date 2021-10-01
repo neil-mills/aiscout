@@ -54,19 +54,19 @@ export const Nav: FC = (): JSX.Element => {
     <NavStyles>
       <ul>
         <li>
-          <NavLink to="">Players</NavLink>
+          <NavLink to="players">Players</NavLink>
         </li>
         <li>
-          <NavLink to="">Scouts</NavLink>
+          <NavLink to="scouts">Scouts</NavLink>
         </li>
         <li>
-          <NavLink to="">News</NavLink>
+          <NavLink to="news">News</NavLink>
         </li>
         <li>
-          <NavLink to="">Contact</NavLink>
+          <NavLink to="contact">Contact</NavLink>
         </li>
         <li>
-          <Button to="">
+          <Button to="get-started">
             Get Started
           </Button>
         </li>

@@ -8,11 +8,11 @@ const ButtonStyles = styled(Link)`
 `
 interface ButtonProps {
   children: React.ReactNode;
-  to: string;
+  link: string;
 }
 
-const Button = ({ children, to = '' }: ButtonProps): JSX.Element => {
-  return <ButtonStyles to="">{children}</ButtonStyles>
+const Button = ({ children, link = '' }: ButtonProps): JSX.Element => {
+  return <ButtonStyles to={link}>{children}</ButtonStyles>
 }
 
 export default Button

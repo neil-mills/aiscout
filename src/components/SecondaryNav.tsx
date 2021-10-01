@@ -39,16 +39,16 @@ const SecondaryNav = () => {
   return (
     <SecondaryNavStyles>
       <ul>
-        <li><Link to="/">Players</Link></li>
-        <li><Link to="/">Scouts</Link></li>
-        <li><Link to="/">News</Link></li>
-        <li><Link to="/">Contact</Link></li>
+        <li><Link to="players">Players</Link></li>
+        <li><Link to="scouts">Scouts</Link></li>
+        <li><Link to="news">News</Link></li>
+        <li><Link to="contact">Contact</Link></li>
       </ul>
       <ul>
-        <li><Link to="/">Terms and conditions</Link></li>
-        <li><Link to="/">Privacy policy</Link></li>
-        <li><Link to="/">Press and coverage</Link></li>
-        <li><Link to="/">Awards &amp; certification</Link></li>
+        <li><Link to="players">Terms and conditions</Link></li>
+        <li><Link to="scouts">Privacy policy</Link></li>
+        <li><Link to="news">Press and coverage</Link></li>
+        <li><Link to="contact">Awards &amp; certification</Link></li>
       </ul>
     </SecondaryNavStyles>
   )
