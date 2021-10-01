@@ -15,12 +15,20 @@ const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0 0 8rem;
   grid-template-columns: 52% 48%;
+  div:nth-child(2) {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+  }
 `
 const ImageContainer = styled.div`
   display: block;
   height: 475px;
+  width: 100%;
+  padding-left: 100px;
   img {
     object-fit: cover;
+    object-position: 100% 50%;
     width: 100%;
     height: 100%;
     display: block;
@@ -29,12 +37,12 @@ const ImageContainer = styled.div`
 `
 const COImageContainer = styled.div`
   width: auto;
-  height: 100%;
   position: absolute;
   top: -9rem;
-  right: calc(48% - 150px);
-  bottom: 9rem;
+  left: -100px;
+  bottom: -8rem;
   background: transparent;
+  z-index: 2;
   img {
     height: 100%;
     margin-left: --10rem;
@@ -47,7 +55,7 @@ const TextContainer = styled.div`
   align-items: flex-end;
   justify-content: center;
   div {
-    max-width: 440px;
+    max-width: 430px;
   }
   h3 {
     font-size: clamp(3.2rem, 2.8vw, var(--font-medium));
@@ -73,28 +81,33 @@ const TextContainer = styled.div`
 const FeatureBlockTwo = () => {
   return (
     <FeatureBlockStyles>
-      <COImageContainer>
-        <img src={Player} />
-      </COImageContainer>
+     
       <FeatureBlockInner>
+        <div>
         <TextContainer>
           <div>
             <h3>A fully automated platform</h3>
             <p>
               Developed by professors, scientists, technologists, and with the
-              assistance of leading Premier League academies Chelsea FC &
+              assistance of leading Premier League academies Chelsea FC &amp;
               Burnley FC, and technology leaders INTEL.
             </p>
             <p>
               The fully automated platform supports the requirements of the
-              amateur player, scouts & coaches, the sport science, recruitment &
+              amateur player, scouts & coaches, the sport science, recruitment &amp;
               commercial departments.
             </p>
           </div>
         </TextContainer>
+        </div>
+        <div>
+        <COImageContainer>
+        <img src={Player} />
+      </COImageContainer>
         <ImageContainer>
           <img src={BgImage} />
         </ImageContainer>
+        </div>
       </FeatureBlockInner>
     </FeatureBlockStyles>
   )
