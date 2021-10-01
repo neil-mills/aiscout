@@ -4,6 +4,7 @@ import NewsImg from '../assets/images/ben-greenwood.jpg'
 import NewsImg2 from '../assets/images/reef-peries.jpg'
 import NewsImg3 from '../assets/images/ben-greenwood-2.jpg'
 import NewsImg4 from '../assets/images/bevan-cross.jpg'
+import Play from '../assets/svg/play.svg'
 
 const NewsSection = styled.section`
   padding: 12rem 0 12rem 10rem;
@@ -23,18 +24,27 @@ const NewsSection = styled.section`
     &:last-child {
       margin-right: 10rem;
     }
+    &.video {
+      cursor: pointer;
+    }
   }
   figure {
     display: grid;
     background: red;
     width: 100%;
     position: relative;
+    align-items: center;
     margin: 0;
     img {
       grid-area: 1 / 1 / 1 / 1;
       object-fit: cover;
       width: 100%;
       height: 100%;
+    }
+    svg {
+      grid-area: 1 / 1 / 1 / 1;
+      z-index: 2;
+      justify-self: center;
     }
   }
 `
@@ -64,7 +74,7 @@ const Track = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   will-change: transform;
-  cursor: pointer;
+  
   width: 100%;
   margin: 5rem 0 0;
   &.active {
@@ -81,17 +91,14 @@ const News = () => {
 
   const articles = [
     { image: NewsImg, club: 'Chelsea FC', name: 'Ben Greenwood' },
-    { image: NewsImg2, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
+    { image: NewsImg2, club: 'Mens National Team Sri Lanka',name: 'Reef Peries', video: "http://"},
     { image: NewsImg3, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
-    { image: NewsImg4, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
+    { image: NewsImg4, club: 'Burnley FC u18 & u23', name: 'Bevan Cross', video: "http://" },
     { image: NewsImg, club: 'Chelsea FC', name: 'Ben Greenwood' },
     { image: NewsImg2, club: 'Mens National Team Sri Lanka',name: 'Reef Peries',},
     { image: NewsImg3, club: 'AFC Bournemouth', name: 'Ben Greenwood' },
     { image: NewsImg4, club: 'Burnley FC u18 & u23', name: 'Bevan Cross' },
   ];
-
-  const [ maskWidth, setMaskWidth ] = useState(0);
-  const [ trackWidth, setTrackWidth ] = useState(0);
 
   const [ articleWidth, setArticleWidth] = useState(0);
 
@@ -104,32 +111,9 @@ const News = () => {
   const sectionRef = useRef<HTMLElement>(null)
  
   const handleResize = () => {
-  //   const width: number = getWidth();
-  //   setMaskWidth(width);
-  //   if(trackRef.current) {
-  //     getTrackWidth();
-  //   }
     handleArticleWidth();
   }
 
-  // const getTrackWidth = () => {
-  //   const articleWidth:number = articleRefs.current[0].clientWidth;
-  //   const gap:number = trackRef?.current ? parseFloat(getComputedStyle(trackRef.current).getPropertyValue('grid-gap')) : 0;
-  //   const trackWidth = (articles.length * articleWidth) + ((articles.length-1) * gap);
-  //   setTrackWidth(trackWidth);
-  // }
-
-  // const getWidth = (): number => {
-  //   const padding: number = sectionRef?.current
-  //     ? parseFloat(
-  //         getComputedStyle(sectionRef.current).getPropertyValue('padding-left')
-  //       )
-  //     : 0
-  //   const width: number = sectionRef?.current
-  //     ? sectionRef.current.clientWidth
-  //     : 0
-  //   return width - padding
-  // }
 
   const handleArticleWidth = () => {
 
@@ -201,13 +185,17 @@ const News = () => {
           onMouseUp={handleOnMouseUp}
           onMouseMove={handleOnMouseMove}
         >
-          {articles.map((item, index) => (
+          {articles.map((item, index) => {
+            return (
+              <>
             <article
               style={{width: `${articleWidth}px`}}
               key={index}
               ref={element => (articleRefs.current[index] = element)}
+              className={item.video ? `video` : ``}
             >
               <figure>
+                {item.video && <Play />}
                 <img src={item.image} />
               </figure>
               <Label>
@@ -215,7 +203,9 @@ const News = () => {
                 <p>{item.name}</p>
               </Label>
             </article>
-          ))}
+            </>
+            )
+})}
         </Track>
      
     </NewsSection>
