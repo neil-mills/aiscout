@@ -1,7 +1,6 @@
 import { Link } from 'gatsby'
 import React, { FC, useRef, useEffect } from 'react'
 const simpleParallax = typeof window !== `undefined` ? require('simple-parallax-js') : null;
-
 import styled from 'styled-components'
 import Icon from '../assets/svg/icon.svg'
 import Logo from '../assets/images/aiscout.svg'
@@ -10,16 +9,14 @@ const ImageBannerStyles = styled.section`
   display: block;
   position: relative;
   width: 100%;
-  height: 95vh;
+  height: 80vh;
   z-index: 2;
 `
-
 const Slides = styled.div`
   display: grid;
   opacity: 1;
   height: 100%;
 `
-
 const Slide = styled.div`
   grid-area: 1 / 1 / 1 / 1;
   transition: opacity 200ms ease;
@@ -33,12 +30,6 @@ const Slide = styled.div`
     object-fit: contain;
     grid-area: 1 / 1 / 1 / 1;
   }
-`
-
-const SlideBg = styled.div`
-  background-position: center center;
-  background-size: cover;
-  width: 100%;
 `
 
 const SlideInner = styled.div`
@@ -107,14 +98,10 @@ const ImageBannerParallax = ({
     let instance:any;
     if(ImageRef.current) {
       instance = new simpleParallax(ImageRef.current,{
-      //  delay: .6,
-	//transition: 'cubic-bezier(0,0,0,1)'
       })
     }
     return () => {
-      //if(isBrowser) {
         instance.destroy();
-      //}
     }
   }, []);
 
@@ -122,8 +109,7 @@ const ImageBannerParallax = ({
     <ImageBannerStyles>
       <Slides>
         <Slide>
-          <img src={img} ref={ImageRef} className="" alt="" />
-         
+          <img src={img} ref={ImageRef} alt="" />         
             <SlideInner>
               <SlideCaption>
                 {icon && <Icon />}
@@ -131,7 +117,6 @@ const ImageBannerParallax = ({
                 {text && <p>{text}</p>}
               </SlideCaption>
             </SlideInner>
-         
         </Slide>
       </Slides>
       {logo && <LogoStyles />}
