@@ -44,10 +44,11 @@ const StatsStyles = styled.section`
   }
   dt {
     color: var(--black);
-    font-size: var(--font-medium);
+    font-size: var(--font-large);
     margin-bottom: 2rem;
     font-family: brandon_grotesquebold;
     font-weight: 400;
+    line-height: 1;
   }
   dd {
     margin: 0;
