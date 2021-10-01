@@ -9,27 +9,11 @@ const ImageBannerStyles = styled.section`
   display: block;
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   z-index: 2;
-`
-const Slides = styled.div`
-  display: grid;
-  opacity: 1;
-  height: 100%;
-`
-const Slide = styled.div`
-  grid-area: 1 / 1 / 1 / 1;
-  transition: opacity 200ms ease;
-  overflow: hidden;
-  display: grid;
-  &.is-active {
-    opacity: 1;
-  }
-  img {
-    width: 100%;
-    object-fit: contain;
-    grid-area: 1 / 1 / 1 / 1;
-  }
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
 `
 
 const SlideInner = styled.div`
@@ -93,32 +77,27 @@ const ImageBannerParallax = ({
   logo = false,
 }: ParallaxBannerProps): JSX.Element => {
 
-  const ImageRef = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    let instance:any;
-    if(ImageRef.current) {
-      instance = new simpleParallax(ImageRef.current,{
-      })
-    }
-    return () => {
-        instance.destroy();
-    }
-  }, []);
+  // const ImageRef = useRef<HTMLImageElement>(null);
+  // useEffect(() => {
+  //   let instance:any;
+  //   if(ImageRef.current) {
+  //     instance = new simpleParallax(ImageRef.current,{
+  //     })
+  //   }
+  //   return () => {
+  //       instance.destroy();
+  //   }
+  // }, []);
 
   return (
-    <ImageBannerStyles>
-      <Slides>
-        <Slide>
-          <img src={img} ref={ImageRef} alt="" />         
-            <SlideInner>
+    <ImageBannerStyles style={{backgroundImage: `url(${img})`}}>
+      <SlideInner>
               <SlideCaption>
                 {icon && <Icon />}
                 {heading && <h3>{heading}</h3>}
                 {text && <p>{text}</p>}
               </SlideCaption>
             </SlideInner>
-        </Slide>
-      </Slides>
       {logo && <LogoStyles />}
     </ImageBannerStyles>
   )
