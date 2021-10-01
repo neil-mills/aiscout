@@ -13,8 +13,8 @@ const HeaderStyles = styled.header`
   grid-gap: 2rem;
   padding: 0 8rem;
   background-color: transparent;
-  transition: all 200ms ease;
-  height: 76px;
+  transition: all 400ms ease;
+  height: 126px;
   align-items: center;
   justify-content: space-between;
   grid-template-columns: auto 1fr;
@@ -22,6 +22,7 @@ const HeaderStyles = styled.header`
   &.on-white {
     background-color: var(--white);
     box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.10);
+    height: 76px;
   }
 `
 const LogoStyles = styled(Link)`
@@ -37,16 +38,6 @@ const LogoStyles = styled(Link)`
   }
 `
 const Header = React.forwardRef((props, ref) => {
-
-  // const onIntersect = (entries) => {
-  //   entries.forEach(entry => {
-  //     console.log('intersected!')
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(onIntersect, options)
-  // },[])
 
   return (
     <HeaderStyles id="header" ref={ref}>

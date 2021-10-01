@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef, useLayoutEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import 'normalize.css'
@@ -22,7 +22,7 @@ export const Layout: FC = ({ children }): JSX.Element => {
  
   const handleOnScroll = () => {
     if(headerRef.current && content) {
-      const offset:number = headerRef.current?.offsetHeight;
+      const offset:number = headerRef.current?.offsetHeight /2;
       if(offset >= content.getBoundingClientRect().top) {
         headerRef.current.classList.add('on-white');
       } else {
@@ -31,7 +31,7 @@ export const Layout: FC = ({ children }): JSX.Element => {
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     content = document.querySelector('#content')
     window.addEventListener('scroll', handleOnScroll);
     window.addEventListener('resize', handleOnScroll)
