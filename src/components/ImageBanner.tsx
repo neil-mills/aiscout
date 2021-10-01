@@ -32,7 +32,7 @@ const Slides = styled.div`
 
 const Slide = styled.div`
   grid-area: 1 / 1 / 1 / 1;
-  transition: opacity 200ms ease;
+  transition: opacity 800ms ease;
   display: grid;
   opacity: 0;
   &.is-active {
@@ -77,7 +77,8 @@ const SlideCaption = styled.div`
   }
   p {
     margin-bottom: 5rem;
-    max-width: 90%;
+    padding-right: 1rem;
+    
   }
 `
 const SlideNav = styled.div`
@@ -99,7 +100,7 @@ const SlideNav = styled.div`
     span {
       display: block;
       box-shadow: rgb(0 0 0 / 20%) 0px 0px 20px 5px;
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 1);
       height: 3px;
       width: 100%;
       position: relative;
@@ -110,7 +111,7 @@ const SlideNav = styled.div`
         left: 0px;
         width: 0;
         height: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--green);
         z-index: 3;
       }
       &.is-before {
@@ -221,7 +222,9 @@ const ImageBanner: FC = () => {
   return (
     <ImageBannerStyles>
       <Slides>
-        {slides.map((slide, index) => (
+        {slides.map((slide, index:number) => {
+          
+          return (
           <Slide
             key={index}
             className={index === 0 ? `is-active` : ``}
@@ -232,13 +235,13 @@ const ImageBanner: FC = () => {
                 <SlideCaption>
                   <h2>{slide.subHeading}</h2>
                   <h3>{slide.heading}</h3>
-                  <p>{slide.text}</p>
+                  <p className={index !== 2 ? `padded` : ``}>{slide.text}</p>
                   {slide.button && <Button to="">{slide.button}</Button>}
                 </SlideCaption>
               </SlideInner>
             </SlideBg>
           </Slide>
-        ))}
+        )})}
       </Slides>
       <SlideNav>
         {slides.map((slide, index) => (
@@ -257,6 +260,7 @@ const ImageBanner: FC = () => {
       </SlideNav>
     </ImageBannerStyles>
   )
+       
 }
 
 // export const useInterval = (callback:any, delay:number) => {
