@@ -43,7 +43,7 @@ const Slide = styled.div`
 `
 
 const SlideBg = styled.div`
-  background-position: center center;
+  background-position: right center;
   background-size: cover;
   width: 100%;
 `
