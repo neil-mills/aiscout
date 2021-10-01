@@ -24,13 +24,16 @@ const ImageBannerStyles = styled.section`
 
 const Slides = styled.div`
   display: grid;
-  opacity: 1;
+  opacity: 0;
   height: 100%;
+  transition: 200ms opacity ease;
+  will-change: opacity;
 `
 
 const Slide = styled.div`
   grid-area: 1 / 1 / 1 / 1;
   transition: opacity 800ms ease;
+  will-change: opacity;
   display: grid;
   opacity: 0;
   &.is-active {
@@ -166,6 +169,7 @@ const slides = [
 const ImageBanner: FC = () => {
   const slideRefs = useRef(new Array())
   const slideButtonRefs = useRef(new Array())
+  const slidesRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout>()
 
@@ -193,6 +197,17 @@ const ImageBanner: FC = () => {
   }
 
   useEffect(() => {
+    const img = new Image();
+    img.src = SlideA;
+    img.onload = () => {
+      if(slidesRef.current) {
+        slidesRef.current.style.opacity = `1`
+      }
+      console.log('first image loaded!')
+    }
+  }, []);
+
+  useEffect(() => {
     const timeout = setTimeout(() => {
       const index: number =
         currentIndex < slides.length - 1 ? currentIndex + 1 : 0
@@ -205,7 +220,7 @@ const ImageBanner: FC = () => {
 
   return (
     <ImageBannerStyles>
-      <Slides>
+      <Slides ref={slidesRef}>
         {slides.map((slide, index: number) => {
           return (
             <Slide
