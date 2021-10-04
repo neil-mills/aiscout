@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import styled from 'styled-components'
 import ImageBanner from '../components/ImageBanner'
 import FeatureBlock from '../components/FeatureBlock'
 import FeatureBlockTwo from '../components/FeatureBlockTwo'
@@ -9,14 +10,27 @@ import Organisations from '../components/Organisations'
 import ParallaxImg1 from '../assets/images/paralax-img-1.jpg'
 import ParallaxImg2 from '../assets/images/paralax-img-2.jpg'
 import Instagram from '../components/Instagram'
+import HexBg from '../assets/images/hex-bg.png'
+
+const FeatureBlockWrapper = styled.div`
+  background-color: var(--lightest-grey);
+  background-position: top right;
+  background-size: 90%;
+  width: 100%;
+  background-image: url(${HexBg});
+  padding: 6vw 0;
+  background-repeat: no-repeat;
+`
 
 const HomePage: FC = () => {
   return (
     <>
       <ImageBanner />
       <div id="content">
+        <FeatureBlockWrapper>
       <FeatureBlock />
       <FeatureBlockTwo />
+        </FeatureBlockWrapper>
       <Stats />
       <ImageBannerParallax
         img={ParallaxImg1}

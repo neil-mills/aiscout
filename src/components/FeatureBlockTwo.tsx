@@ -5,16 +5,19 @@ import BgImage from '../assets/images/auto-platform-img.jpg'
 import Player from '../assets/images/player.png'
 
 const FeatureBlockStyles = styled.section`
-  padding: 0 0 9rem;
+  padding: 0;
   position: relative;
-  background-color: var(--lightest-grey);
+  background-color: transparent;
   z-index: 2;
+  margin-top: -4rem;
 `
 
 const FeatureBlockInner = styled.div`
   display: grid;
-  padding: 0 0 8rem;
-  grid-template-columns: 52% 48%;
+  padding: 0;
+  grid-template-columns: 40% 1fr;
+  align-items: flex-end;
+
   div:nth-child(2) {
     display: flex;
     position: relative;
@@ -23,9 +26,9 @@ const FeatureBlockInner = styled.div`
 `
 const ImageContainer = styled.div`
   display: block;
-  height: 475px;
   width: 100%;
-  padding-left: 100px;
+  padding: 6vw 0 6vw 25%;
+  
   img {
     object-fit: cover;
     object-position: 100% 50%;
@@ -38,9 +41,9 @@ const ImageContainer = styled.div`
 const COImageContainer = styled.div`
   width: auto;
   position: absolute;
-  top: -9rem;
-  left: -100px;
-  bottom: -8rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
   background: transparent;
   z-index: 2;
   img {
@@ -50,12 +53,12 @@ const COImageContainer = styled.div`
   }
 `
 const TextContainer = styled.div`
-  padding: 8rem 8rem 0;
+  padding: 0 0 6vw 6vw;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   div {
-    max-width: 430px;
+    max-width: 80%;
   }
   h3 {
     font-size: clamp(3.2rem, 2.8vw, var(--font-medium));
@@ -64,7 +67,7 @@ const TextContainer = styled.div`
   }
   p {
     margin-bottom: 3rem;
-    width: 96%;
+
     &:last-of-type {
       margin: 0;
     }
@@ -83,7 +86,8 @@ const FeatureBlockTwo = () => {
     <FeatureBlockStyles>
      
       <FeatureBlockInner>
-        <div>
+       
+         
         <TextContainer>
           <div>
             <h3>A fully automated platform</h3>
@@ -99,12 +103,14 @@ const FeatureBlockTwo = () => {
             </p>
           </div>
         </TextContainer>
-        </div>
+       
+       
         <div>
+       
+        <ImageContainer>
         <COImageContainer>
         <img src={Player} />
       </COImageContainer>
-        <ImageContainer>
           <img src={BgImage} />
         </ImageContainer>
         </div>

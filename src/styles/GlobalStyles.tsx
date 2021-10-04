@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
   }
   #content {
     position: relative;
+    z-index: 2;
   }
   ul {
     list-style: none;
