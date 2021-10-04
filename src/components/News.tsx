@@ -32,6 +32,7 @@ const NewsSection = styled.section`
     display: grid;
     background: red;
     width: 100%;
+    height: auto;
     position: relative;
     align-items: center;
     margin: 0;
@@ -39,7 +40,7 @@ const NewsSection = styled.section`
       grid-area: 1 / 1 / 1 / 1;
       object-fit: cover;
       width: 100%;
-      height: 100%;
+      height: auto;
     }
     svg {
       grid-area: 1 / 1 / 1 / 1;
