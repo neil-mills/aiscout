@@ -17,7 +17,8 @@ const FeatureBlockStyles = styled.section`
 const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: minmax(0, 495px) 1fr;
+  padding: 0 0 0 6vw;
 `
 const ImageContainer = styled.div`
   display: block;
@@ -79,9 +80,6 @@ const Video = styled.div`
   padding: 18% 0 21%;
   z-index: 1;
 `
-const FirstColumn = styled.div`
-  padding-left: 6vw;
-`
 
 const FeatureBlock: FC = (): JSX.Element => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -122,25 +120,23 @@ const FeatureBlock: FC = (): JSX.Element => {
   return (
     <FeatureBlockStyles>
       <FeatureBlockInner>
-        <FirstColumn>
-          <ImageContainer>
-            <img src={IPhone} />
-            <Video>
-              <video
-                ref={videoRef}
-                loop={true}
-                style={{ backgroundImage: `url(${BgImage})` }}
-                muted={true}
-                playsInline={true}
-                data-wf-ignore="true"
-                data-object-fit="cover"
-              >
-                <source src={VideoMP4} data-wf-ignore="true" />
-                <source src={VideoWebM} data-wf-ignore="true" />
-              </video>
-            </Video>
-          </ImageContainer>
-        </FirstColumn>
+        <ImageContainer>
+          <img src={IPhone} />
+          <Video>
+            <video
+              ref={videoRef}
+              loop={true}
+              style={{ backgroundImage: `url(${BgImage})` }}
+              muted={true}
+              playsInline={true}
+              data-wf-ignore="true"
+              data-object-fit="cover"
+            >
+              <source src={VideoMP4} data-wf-ignore="true" />
+              <source src={VideoWebM} data-wf-ignore="true" />
+            </video>
+          </Video>
+        </ImageContainer>
         <TextContainer>
           <div>
             <h3>Award winning, proven technology</h3>

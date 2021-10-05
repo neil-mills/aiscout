@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 
 import BgImage from '../assets/images/auto-platform-img.jpg'
@@ -15,8 +15,9 @@ const FeatureBlockStyles = styled.section`
 const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: minmax(0, 495px) 1fr;
   align-items: flex-end;
+  padding: 0 0 0 6vw;
 
   div:nth-child(2) {
     display: flex;
@@ -27,8 +28,10 @@ const FeatureBlockInner = styled.div`
 const ImageContainer = styled.div`
   display: block;
   width: 100%;
-  padding: 6vw 0 6vw 25%;
-  
+  max-width: 1000px;
+  padding: 6vw 0 6vw 20%;
+  position: relative;
+
   img {
     object-fit: cover;
     object-position: 100% 50%;
@@ -38,6 +41,7 @@ const ImageContainer = styled.div`
     margin: 0;
   }
 `
+
 const COImageContainer = styled.div`
   width: auto;
   position: absolute;
@@ -49,11 +53,10 @@ const COImageContainer = styled.div`
   img {
     height: 100%;
     margin-left: --10rem;
-
   }
 `
 const TextContainer = styled.div`
-  padding: 0 0 6vw 6vw;
+  padding: 0 0 6vw;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -81,13 +84,26 @@ const TextContainer = styled.div`
     }
   }
 `
-const FeatureBlockTwo = () => {
+const FeatureBlockTwo: FC = () => {
+  const imageRef = useRef<HTMLDivElement>(null)
+  const imageContainerRef = useRef<HTMLDivElement>(null)
+
+  const handleResize = () => {
+    const height: number = imageRef.current ? imageRef.current.clientHeight : 0
+    const padding: number = (height / 100) * 30
+    if (imageContainerRef.current) {
+      imageContainerRef.current.style.paddingLeft = `${padding}px`
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    handleResize()
+  }, [])
+
   return (
     <FeatureBlockStyles>
-     
       <FeatureBlockInner>
-       
-         
         <TextContainer>
           <div>
             <h3>A fully automated platform</h3>
@@ -98,21 +114,19 @@ const FeatureBlockTwo = () => {
             </p>
             <p>
               The fully automated platform supports the requirements of the
-              amateur player, scouts & coaches, the sport science, recruitment &amp;
-              commercial departments.
+              amateur player, scouts & coaches, the sport science, recruitment
+              &amp; commercial departments.
             </p>
           </div>
         </TextContainer>
-       
-       
+
         <div>
-       
-        <ImageContainer>
-        <COImageContainer>
-        <img src={Player} />
-      </COImageContainer>
-          <img src={BgImage} />
-        </ImageContainer>
+          <ImageContainer ref={imageContainerRef}>
+            <COImageContainer ref={imageRef}>
+              <img src={Player} />
+            </COImageContainer>
+            <img src={BgImage} />
+          </ImageContainer>
         </div>
       </FeatureBlockInner>
     </FeatureBlockStyles>
