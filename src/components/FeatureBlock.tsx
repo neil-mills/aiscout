@@ -27,12 +27,15 @@ const ImageContainer = styled.div`
   max-width: 495px;
   img {
     position: relative;
-    margin: 0 auto;
-    text-align: center;
     display: block;
     width: 80%;
     height: auto;
     z-index: 2;
+    left: 50%;
+    transform: translate(-50%, 0);
+    /* animation-duration: 18s;
+    animation-name: movePhone;
+    animation-iteration-count: infinite; */
   }
   video {
     height: 100%;
@@ -41,6 +44,20 @@ const ImageContainer = styled.div`
     background-position: 50% 50%;
     object-fit: cover;
     display: block;
+  }
+  @keyframes movePhone {
+    0% {
+      left: 61%;
+    }
+    20% {
+      left: 61%;
+    }
+    50% {
+      left: 38%;
+    }
+    100% {
+      left: 38%;
+    }
   }
 `
 const TextContainer = styled.div`
