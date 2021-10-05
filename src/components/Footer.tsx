@@ -17,6 +17,7 @@ const ImageBanner = styled.section`
   background-position: center center;
   background-size: cover;
   width: 100%;
+  height: 458px;
   h3 {
     font-size: var(--font-medium);
     margin-bottom: 1rem;
@@ -26,8 +27,9 @@ const ImageBanner = styled.section`
     margin-bottom: 4rem;
   }
   & > div {
-    padding: 12rem 10rem;
+    padding: 0 6vw;
     display: grid;
+    height: 100%;
     background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.5) 0%,
