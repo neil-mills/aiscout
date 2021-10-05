@@ -11,9 +11,9 @@ const GlobalStyles = createGlobalStyle`
     --light-grey: #BFBFBF;
     --font-large: 4.8rem;
     --font-medium: 3.9rem;
+    --font-medium-mob: 3.4rem;
     --font-small: 2rem;
-    --font-xsmall: 1.4rem;
-
+    --font-xsmall: 1.6rem;
   }
 
   html {
@@ -21,8 +21,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-size: var(--font-small);
-    line-height: 2.8rem;
+    font-size: var(--font-xsmall);
+    line-height: 2.4rem;
+    @media screen and (min-width: 1100px) {
+      font-size: var(--font-small);
+      line-height: 2.8rem;
+    }
   }
 
   #content {

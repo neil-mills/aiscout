@@ -15,7 +15,7 @@ const FeatureBlockStyles = styled.section`
 const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
-  grid-template-columns: minmax(0, 495px) 1fr;
+  grid-template-columns: 38% 1fr;
   align-items: flex-end;
   padding: 0 0 0 6vw;
 
@@ -61,11 +61,13 @@ const TextContainer = styled.div`
   align-items: flex-end;
   justify-content: center;
   div {
-    max-width: 80%;
+    width: 100%;
   }
   h3 {
-    font-size: clamp(3.2rem, 2.8vw, var(--font-medium));
-    font-size: var(--font-medium);
+    font-size: var(--font-medium-mob);
+    @media screen and (min-width: 1100px) {
+      font-size: var(--font-medium);
+    }
     margin-bottom: 3rem;
   }
   p {
