@@ -11,7 +11,7 @@ const HeaderStyles = styled.header`
   width: 100%;
   display: grid;
   grid-gap: 2rem;
-  padding: 0 8rem;
+  padding: 0 6vw;
   background-color: transparent;
   transition: all 400ms ease;
   height: 126px;
@@ -21,7 +21,7 @@ const HeaderStyles = styled.header`
   z-index: 10;
   &.on-white {
     background-color: var(--white);
-    box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.10);
+    box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.1);
     height: 76px;
   }
 `
@@ -38,7 +38,6 @@ const LogoStyles = styled(Link)`
   }
 `
 const Header = React.forwardRef((props, ref) => {
-
   return (
     <HeaderStyles id="header" ref={ref}>
       <LogoStyles aria-current="page" to="">
@@ -47,6 +46,6 @@ const Header = React.forwardRef((props, ref) => {
       <Nav />
     </HeaderStyles>
   )
-});
+})
 
 export default Header
