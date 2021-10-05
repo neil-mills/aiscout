@@ -30,6 +30,9 @@ const Typography = createGlobalStyle`
     text-transform: uppercase;
     letter-spacing: .02rem;
     color: var(--black);
+    span {
+      text-transform: lowercase;
+    }
   }
 `
 

@@ -57,12 +57,12 @@ const SlideInner = styled.div`
   color: var(--white);
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   justify-content: space-between;
 `
 
 const SlideCaption = styled.div`
-  max-width: 800px;
+  max-width: 60%;
   width: 100%;
   h2,
   h3 {
@@ -78,7 +78,7 @@ const SlideCaption = styled.div`
   }
   p {
     margin-bottom: 5rem;
-    padding-right: 1rem;
+    padding-right: 4rem;
   }
 `
 const SlideNav = styled.div`
@@ -140,35 +140,29 @@ const slides = [
   {
     image: SlideA,
     subHeading: 'Ai Platform',
-    heading: 'The Worlds 1st talent analysis & development platform',
-    text: `An Artificial Intelligence based platform that professional
-    football clubs and many other footballing organisations are
-    utilising to find, analyse, and develop amateur players all
-    over the world.`,
+    heading:
+      'The Worlds <span>1st</span> talent analysis &amp;<br />development platform',
+    text: 'An Artificial Intelligence based platform that professional football clubs and many other footballing organisations are utilising to find, analyse, scout and develop amateur players all over the World.',
   },
   {
     image: SlideB,
     subHeading: 'Players',
-    heading: 'Analyse your potential and get scouted with an app',
-    text: `An Artificial Intelligence based platform that professional
-    football clubs, and many other types of footballing
-    organisations are utilising to find, trial and develop players
-    like you.`,
+    heading: 'TRIALS, ANALYSIS, FEEDBACK,<br />COACHING, ADVICE & MORE',
+    text: 'Professional clubs, FA\'s federations, universities and private academies are now providing amateur players opportunities due to our technology.',
     downloadLinks: true,
     button: 'How it works',
   },
   {
     image: SlideC,
     subHeading: 'Scouts',
-    heading: 'Use technology to trial, analyse and develop talent',
-    text: `A fully automated platform that manages your recruitment
-  department and automates and supports your Scouts day.`,
+    heading: 'Use technology to trial, analyse<br />and develop amateur talent',
+    text: 'Developed by professors, scientists & technologists, with the assistance of premier league clubs, to bring data into the amateur world.',
     button: 'What is it?',
   },
 ]
 const ImageBanner: FC = () => {
-  const slideRefs = useRef(new Array())
-  const slideButtonRefs = useRef(new Array())
+  const slideRefs = useRef<HTMLDivElement[]>([])
+  const slideButtonRefs = useRef<HTMLButtonElement[]>([])
   const slidesRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout>()
@@ -197,15 +191,15 @@ const ImageBanner: FC = () => {
   }
 
   useEffect(() => {
-    const img = new Image();
-    img.src = SlideA;
+    const img = new Image()
+    img.src = SlideA
     img.onload = () => {
-      if(slidesRef.current) {
-        slidesRef.current.style.opacity = `1`
+      if (slidesRef.current) {
+        slidesRef.current.style.opacity = '1'
       }
       console.log('first image loaded!')
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -225,15 +219,17 @@ const ImageBanner: FC = () => {
           return (
             <Slide
               key={index}
-              className={index === 0 ? `is-active` : ``}
+              className={index === 0 ? 'is-active' : ''}
               ref={element => (slideRefs.current[index] = element)}
             >
               <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
                 <SlideInner>
                   <SlideCaption>
                     <h2>{slide.subHeading}</h2>
-                    <h3>{slide.heading}</h3>
-                    <p className={index !== 2 ? `padded` : ``}>{slide.text}</p>
+                    <h3
+                      dangerouslySetInnerHTML={{ __html: slide.heading }}
+                    ></h3>
+                    <p className={index !== 2 ? 'padded' : ''}>{slide.text}</p>
                     {slide.button && (
                       <Button link="/get-started">{slide.button}</Button>
                     )}
@@ -246,7 +242,7 @@ const ImageBanner: FC = () => {
         })}
       </Slides>
       <SlideNav>
-        {slides.map((slide, index) => (
+        {slides.map((_, index) => (
           <button
             type="button"
             aria-label={`Slide ${index + 1}`}
@@ -254,7 +250,7 @@ const ImageBanner: FC = () => {
             key={`btn${index}`}
           >
             <span
-              className={index === 0 ? `is-active` : ``}
+              className={index === 0 ? 'is-active' : ''}
               ref={element => (slideButtonRefs.current[index] = element)}
             ></span>
           </button>
