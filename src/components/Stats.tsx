@@ -56,28 +56,35 @@ const StatsStyles = styled.section`
 `
 
 interface CounterProps {
-  text: string;
-  total: number;
-  postfix?: string;
-  increment?:number;
-  active: boolean;
-  time: number;
+  text: string
+  total: number
+  postfix?: string
+  increment?: number
+  active: boolean
+  time: number
 }
 
-const Counter = ({ text, total, postfix = '', increment = 1, active, time }: CounterProps): JSX.Element => {
-  const [ isActive, setIsActive] = useState<boolean>(false);
-  if(!isActive && active) setIsActive(active);
+const Counter = ({
+  text,
+  total,
+  postfix = '',
+  increment = 1,
+  active,
+  time,
+}: CounterProps): JSX.Element => {
+  const [isActive, setIsActive] = useState<boolean>(false)
+  if (!isActive && active) setIsActive(active)
   const [count, setCount] = useState<number>(0)
-  const isDecimal:boolean = !Number.isInteger(increment);
-  const steps:number = total / increment;
-  const delay:number = time / steps;
+  const isDecimal = !Number.isInteger(increment)
+  const steps: number = total / increment
+  const delay: number = time / steps
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-        if (count < total && isActive) {
-        setCount(prevCount => prevCount + increment)   
+      if (count < total && isActive) {
+        setCount(prevCount => prevCount + increment)
       }
-      }, delay)
+    }, delay)
     return () => {
       clearTimeout(timeoutId)
     }
@@ -85,7 +92,10 @@ const Counter = ({ text, total, postfix = '', increment = 1, active, time }: Cou
 
   return (
     <>
-      <dt>{isDecimal && count > 0 ? count.toFixed(1) : count}{postfix}</dt>
+      <dt>
+        {isDecimal && count > 0 ? count.toFixed(1) : count}
+        {postfix}
+      </dt>
       <dd>{text}</dd>
     </>
   )
@@ -129,22 +139,47 @@ const Stats: FC = () => {
       <dl>
         <div>
           <div>
-            <Counter text={`Months live testing`} total={7} active={inViewport} time={1050} /> 
+            <Counter
+              text={'Months live testing'}
+              total={7}
+              active={inViewport}
+              time={1050}
+            />
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Data points analysed`} total={1.5} increment={.1} postfix={`M+`} active={inViewport} time={1050} /> 
+            <Counter
+              text={'Data points analysed'}
+              total={1.5}
+              increment={0.1}
+              postfix={'M+'}
+              active={inViewport}
+              time={1050}
+            />
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Players analysed in-app`} total={19} postfix={`K`} active={inViewport} time={1050} /> 
+            <Counter
+              text={'Players analysed in-app'}
+              total={19}
+              postfix={'K'}
+              active={inViewport}
+              time={1050}
+            />
           </div>
         </div>
         <div>
           <div>
-          <Counter text={`Trailed & signed for pro clubs and selected for national squads`} total={45}  active={inViewport} time={1050} /> 
+            <Counter
+              text={
+                'Trailed & signed for pro clubs and selected for national squads'
+              }
+              total={45}
+              active={inViewport}
+              time={1050}
+            />
           </div>
         </div>
       </dl>
