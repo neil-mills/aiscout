@@ -52,7 +52,7 @@ const SlideInner = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  padding: 6rem 8rem;
+  padding: 6vw;
   flex-direction: row;
   color: var(--white);
   height: 100%;
@@ -148,7 +148,7 @@ const slides = [
     image: SlideB,
     subHeading: 'Players',
     heading: 'TRIALS, ANALYSIS, FEEDBACK,<br />COACHING, ADVICE & MORE',
-    text: 'Professional clubs, FA\'s federations, universities and private academies are now providing amateur players opportunities due to our technology.',
+    text: "Professional clubs, FA's federations, universities and private academies are now providing amateur players opportunities due to our technology.",
     downloadLinks: true,
     button: 'How it works',
   },
