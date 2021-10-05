@@ -25,9 +25,6 @@ const GlobalStyles = createGlobalStyle`
     line-height: 2.8rem;
   }
 
-  main {
-    padding-top: 95vh;
-  }
   #content {
     position: relative;
     z-index: 2;

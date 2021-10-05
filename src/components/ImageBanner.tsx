@@ -12,12 +12,9 @@ const DownloadNavStyles = styled(DownloadNav)`
 `
 
 const ImageBannerStyles = styled.section`
-  position: fixed;
+  position: relative;
   width: 100%;
-  top: 0;
-  left: 0;
   display: block;
-  width: 100%;
   height: 95vh;
   z-index: 1;
 `
@@ -62,7 +59,7 @@ const SlideInner = styled.div`
 `
 
 const SlideCaption = styled.div`
-  max-width: 60%;
+  max-width: 70%;
   width: 100%;
   h2,
   h3 {
@@ -141,21 +138,21 @@ const slides = [
     image: SlideA,
     subHeading: 'Ai Platform',
     heading:
-      'The Worlds <span>1st</span> talent analysis &amp;<br />development platform',
+      'The Worlds <span>1st</span> talent analysis &amp; development platform',
     text: 'An Artificial Intelligence based platform that professional football clubs and many other footballing organisations are utilising to find, analyse, scout and develop amateur players all over the World.',
   },
   {
     image: SlideB,
     subHeading: 'Players',
-    heading: 'TRIALS, ANALYSIS, FEEDBACK,<br />COACHING, ADVICE & MORE',
-    text: "Professional clubs, FA's federations, universities and private academies are now providing amateur players opportunities due to our technology.",
+    heading: 'TRIALS, ANALYSIS, FEEDBACK, COACHING, ADVICE & MORE',
+    text: 'Professional clubs, FA\'s federations, universities and private academies are now providing amateur players opportunities due to our technology.',
     downloadLinks: true,
     button: 'How it works',
   },
   {
     image: SlideC,
     subHeading: 'Scouts',
-    heading: 'Use technology to trial, analyse<br />and develop amateur talent',
+    heading: 'Use technology to trial, analyse and develop amateur talent',
     text: 'Developed by professors, scientists & technologists, with the assistance of premier league clubs, to bring data into the amateur world.',
     button: 'What is it?',
   },
@@ -218,13 +215,14 @@ const ImageBanner: FC = () => {
         {slides.map((slide, index: number) => {
           return (
             <Slide
+              data-slide
               key={index}
               className={index === 0 ? 'is-active' : ''}
               ref={element => (slideRefs.current[index] = element)}
             >
               <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
                 <SlideInner>
-                  <SlideCaption>
+                  <SlideCaption data-caption>
                     <h2>{slide.subHeading}</h2>
                     <h3
                       dangerouslySetInnerHTML={{ __html: slide.heading }}

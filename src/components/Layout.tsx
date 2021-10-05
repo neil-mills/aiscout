@@ -14,33 +14,33 @@ import Typography from '../styles/Typography'
 
 import './layout.css'
 
-
 export const Layout: FC = ({ children }): JSX.Element => {
+  const headerRef = useRef<HTMLHeadingElement>(null)
+  let content: HTMLElement | null = null
 
-  const headerRef = useRef<HTMLHeadingElement>(null);
-  let content:HTMLElement | null = null;
- 
   const handleOnScroll = () => {
-    if(headerRef.current && content) {
-      const offset:number = headerRef.current?.offsetHeight /2;
-      if(offset >= content.getBoundingClientRect().top) {
-        headerRef.current.classList.add('on-white');
+    if (headerRef.current && content) {
+      const offset: number = headerRef.current?.offsetHeight / 2
+      if (offset >= content.getBoundingClientRect().top) {
+        headerRef.current.classList.add('on-white')
       } else {
-        headerRef.current.classList.remove('on-white');
+        headerRef.current.classList.remove('on-white')
       }
     }
   }
 
   useLayoutEffect(() => {
-    content = document.querySelector('#content')
-    window.addEventListener('scroll', handleOnScroll);
+    content = document.querySelector(
+      'div[data-slide].is-active div[data-caption]'
+    )
+    window.addEventListener('scroll', handleOnScroll)
     window.addEventListener('resize', handleOnScroll)
     handleOnScroll()
     return () => {
-      window.removeEventListener('scroll', handleOnScroll);
-      window.removeEventListener('resize', handleOnScroll);
+      window.removeEventListener('scroll', handleOnScroll)
+      window.removeEventListener('resize', handleOnScroll)
     }
-  },[]);
+  }, [])
 
   return (
     <>
