@@ -1,11 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import DataIQ from '../assets/images/data-iq-awards.png'
 import WFS from '../assets/images/wfs.png'
 import OutstandingInnovationInitiative from '../assets/images/outstanding-innovation-initiative.png'
 import BgImage from '../assets/images/iphone-img.jpg'
 import IPhone from '../assets/images/iphone.png'
-import HexBg from '../assets/images/hex-bg.png'
 import VideoMP4 from '../assets/video/player-vid.mp4'
 import VideoWebM from '../assets/video/player-vid.webm'
 
@@ -15,7 +14,6 @@ const FeatureBlockStyles = styled.section`
   width: 100%;
   z-index: 2;
 `
-
 const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
@@ -42,20 +40,6 @@ const ImageContainer = styled.div`
     background-position: 50% 50%;
     object-fit: cover;
     display: block;
-  }
-`
-const COImageContainer = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  text-align: center;
-  background: transparent;
-  img {
-    height: 100%;
-    margin: 0 auto;
   }
 `
 const TextContainer = styled.div`
@@ -94,34 +78,68 @@ const Video = styled.div`
   height: 100%;
   padding: 18% 0 21%;
   z-index: 1;
-  `
+`
 const FirstColumn = styled.div`
   padding-left: 6vw;
 `
-const FeatureBlock = () => {
+
+const FeatureBlock: FC = (): JSX.Element => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const callback = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ): void => {
+    entries.forEach(entry => {
+      // setAutoPlay(entry.isIntersecting)
+      if (entry.isIntersecting) {
+        if (videoRef.current) {
+          videoRef.current.play()
+        }
+      } else {
+        if (videoRef.current) {
+          videoRef.current.pause()
+        }
+      }
+    })
+  }
+
+  useEffect(() => {
+    const options = {
+      root: null, // relative to document viewport
+      rootMargin: '0px', // margin around root. Values are similar to css property. Unitless values not allowed
+      threshold: 0, // visible amount of item shown in relation to root
+    }
+    const observer: IntersectionObserver = new IntersectionObserver(
+      callback,
+      options
+    )
+    if (videoRef.current) {
+      observer.observe(videoRef.current)
+    }
+  }, [])
+
   return (
     <FeatureBlockStyles>
-     
       <FeatureBlockInner>
         <FirstColumn>
-        <ImageContainer>
-
-        <img src={IPhone} />
-  <Video>
-          <video
-            autoPlay={true}
-            loop={true}
-            style={{ backgroundImage: `url(${BgImage})` }}
-            muted={true}
-            playsInline={true}
-            data-wf-ignore="true"
-            data-object-fit="cover"
-          >
-            <source src={VideoMP4} data-wf-ignore="true" />
-            <source src={VideoWebM} data-wf-ignore="true" />
-          </video>
-          </Video>
-        </ImageContainer>
+          <ImageContainer>
+            <img src={IPhone} />
+            <Video>
+              <video
+                ref={videoRef}
+                loop={true}
+                style={{ backgroundImage: `url(${BgImage})` }}
+                muted={true}
+                playsInline={true}
+                data-wf-ignore="true"
+                data-object-fit="cover"
+              >
+                <source src={VideoMP4} data-wf-ignore="true" />
+                <source src={VideoWebM} data-wf-ignore="true" />
+              </video>
+            </Video>
+          </ImageContainer>
         </FirstColumn>
         <TextContainer>
           <div>
