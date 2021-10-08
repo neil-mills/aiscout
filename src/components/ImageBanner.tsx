@@ -77,6 +77,30 @@ const SlideCaption = styled.div`
     margin-bottom: 5rem;
     padding-right: 4rem;
   }
+  &[data-caption='0'] {
+    h3 {
+      max-width: 840px;
+    }
+    p {
+      max-width: 830px;
+    }
+  }
+  &[data-caption='1'] {
+    h3 {
+      max-width: 750px;
+    }
+    p {
+      max-width: 785px;
+    }
+  }
+  &[data-caption='2'] {
+    h3 {
+      max-width: 875px;
+    }
+    p {
+      max-width: 630px;
+    }
+  }
 `
 const SlideNav = styled.div`
   display: flex;
@@ -215,14 +239,14 @@ const ImageBanner: FC = () => {
         {slides.map((slide, index: number) => {
           return (
             <Slide
-              data-slide
+              data-slide={index}
               key={index}
               className={index === 0 ? 'is-active' : ''}
               ref={element => (slideRefs.current[index] = element)}
             >
               <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
                 <SlideInner>
-                  <SlideCaption data-caption>
+                  <SlideCaption data-caption={index}>
                     <h2>{slide.subHeading}</h2>
                     <h3
                       dangerouslySetInnerHTML={{ __html: slide.heading }}
