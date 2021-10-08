@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { graphql } from 'gatsby'
 import ImageBanner from '../components/ImageBanner'
 import FeatureBlock from '../components/FeatureBlock'
 import FeatureBlockTwo from '../components/FeatureBlockTwo'
@@ -22,32 +23,43 @@ const FeatureBlockWrapper = styled.div`
   background-repeat: no-repeat;
 `
 
-const HomePage: FC = () => {
+const HomePage = ({ data }) => {
   return (
     <>
       <ImageBanner />
       <div id="content">
         <FeatureBlockWrapper>
-      <FeatureBlock />
-      <FeatureBlockTwo />
+          <FeatureBlock />
+          <FeatureBlockTwo />
         </FeatureBlockWrapper>
-      <Stats />
-      <ImageBannerParallax
-        img={ParallaxImg1}
-        heading={'An equal opportunity for players all over the world.'}
-        text={'All you need is a mobile phone.'}
-        icon={true}
-      />
-      <News />
-      <Organisations />
-      <ImageBannerParallax
-        img={ParallaxImg2}
-        logo={true}
-      />
-      <Instagram />
+        <Stats />
+        <ImageBannerParallax
+          img={ParallaxImg1}
+          heading={'An equal opportunity for all amateur players.'}
+          text={'All you need is a mobile phone.'}
+          icon={true}
+        />
+        <News />
+        <Organisations />
+        <ImageBannerParallax img={ParallaxImg2} logo={true} />
+        <Instagram data={data} />
       </div>
     </>
   )
 }
+
+export const query = graphql`
+  query {
+    feed: allInstagramImage {
+      nodes {
+        id
+        media_type
+        media_url
+        thumbnail_url
+        permalink
+      }
+    }
+  }
+`
 
 export default HomePage

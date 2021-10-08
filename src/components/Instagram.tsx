@@ -39,6 +39,7 @@ const IS = styled.section`
     grid-template-rows: 1fr 1fr;
     grid-gap: 2rem;
     li {
+      display: block;
       &:nth-child(3) {
         grid-column: 1 / 2;
         grid-row: 2 / 3;
@@ -55,38 +56,41 @@ const IS = styled.section`
         width: 100%;
         height: auto;
         display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      a {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        &:before {
+          content: '';
+          padding-top: 100%;
+          display: block;
+        }
       }
     }
   }
 `
+interface FeedItem {
+  id: string
+  media_type: string
+  media_url: string
+  thumbnail_url?: string
+}
 
-const Instagram = (): JSX.Element => {
-  const theCode =
-    'AQCEdv3KescBhARDrUy6VwhpAvElpTBgte_ijiLVdYTHTwgAf-L7l97n55nRKKWNhmDKL8rx9P7fNZ0dJAFYMWnp25-TriHtSt9w3aFOAv8wWZFhAdfGBQR9wSkQQoY3aMU5xtK0uQ2bvYIdLgIbRhDWs1Uoz1jKej1jpqasLXqepRgS3hz0ig7Eud8mEzdLKAbmyQWPXzrZCLVOAmxAYxpXIkSuLgTiDJ5PC58Es6zajQ'
-  const fetchFeed = async () => {
-    const response = await fetch(
-      'https://api.instagram.com/oauth/access_token',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        }, // this line is important, if this content-type is
-        body: JSON.stringify({
-          client_id: '4536825176383898',
-          client_secret: 'd5351d431f4ac71595d376eca0fd453a',
-          grant_type: 'authorization_code',
-          redirect_uri:
-            'https://condescending-engelbart-cbb123.netlify.app/auth/',
-          code: theCode,
-        }),
-      }
-    )
-    console.log(response)
-  }
-  useEffect(() => {
-    fetchFeed()
-  }, [])
+interface InstagramProps {
+  feed: [FeedItem]
+}
+
+const Instagram = ({ data }) => {
+  // useEffect(() => {}, [feed])
+  if (!data) return null
+  console.log('data=', data.feed.nodes)
   return (
     <IS>
       <header>
@@ -99,51 +103,19 @@ const Instagram = (): JSX.Element => {
         </aside>
       </header>
       <ul>
-        <li>
-          <a href="">
-            <img src={Insta1} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta2} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta3} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta4} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta5} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta6} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta7} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta8} />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src={Insta9} />
-          </a>
-        </li>
+        {data.feed.nodes.map(item => (
+          <li key={item.id}>
+            <a href={item.permalink} target="_blank" rel="noreferrer">
+              <img
+                src={
+                  ['IMAGE', 'CAROUSEL_ALBUM'].includes(item.media_type)
+                    ? item.media_url
+                    : item.thumbnail_url
+                }
+              />
+            </a>
+          </li>
+        ))}
       </ul>
     </IS>
   )
