@@ -68,7 +68,10 @@ const Instagram = (): JSX.Element => {
       'https://api.instagram.com/oauth/access_token',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }, // this line is important, if this content-type is
         body: JSON.stringify({
           client_id: '4536825176383898',
           client_secret: 'd5351d431f4ac71595d376eca0fd453a',
