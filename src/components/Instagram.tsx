@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import Button from './Button'
 import styled from 'styled-components'
 import Insta1 from '../assets/images/insta-1.jpg'
@@ -60,7 +60,30 @@ const IS = styled.section`
   }
 `
 
-const Instagram = () => {
+const Instagram = (): JSX.Element => {
+  const theCode =
+    'AQCEdv3KescBhARDrUy6VwhpAvElpTBgte_ijiLVdYTHTwgAf-L7l97n55nRKKWNhmDKL8rx9P7fNZ0dJAFYMWnp25-TriHtSt9w3aFOAv8wWZFhAdfGBQR9wSkQQoY3aMU5xtK0uQ2bvYIdLgIbRhDWs1Uoz1jKej1jpqasLXqepRgS3hz0ig7Eud8mEzdLKAbmyQWPXzrZCLVOAmxAYxpXIkSuLgTiDJ5PC58Es6zajQ'
+  const fetchFeed = async () => {
+    const response = await fetch(
+      'https://api.instagram.com/oauth/access_token',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is
+        body: JSON.stringify({
+          client_id: '4536825176383898',
+          client_secret: 'd5351d431f4ac71595d376eca0fd453a',
+          grant_type: 'authorization_code',
+          redirect_uri:
+            'https://condescending-engelbart-cbb123.netlify.app/auth/',
+          code: theCode,
+        }),
+      }
+    )
+    console.log(response)
+  }
+  useEffect(() => {
+    fetchFeed()
+  }, [])
   return (
     <IS>
       <header>
