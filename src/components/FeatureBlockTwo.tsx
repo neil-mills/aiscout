@@ -16,7 +16,7 @@ const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
   grid-template-columns: 38% 1fr;
-  align-items: flex-end;
+  align-items: center;
   padding: 0 0 0 6vw;
 
   div:nth-child(2) {
@@ -56,12 +56,12 @@ const COImageContainer = styled.div`
   }
 `
 const TextContainer = styled.div`
-  padding: 0 0 6vw;
+  padding: 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   div {
-    width: 100%;
+    width: 80%;
   }
   h3 {
     font-size: var(--font-medium-mob);
