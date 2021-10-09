@@ -1,7 +1,6 @@
-import { Link } from 'gatsby'
-import React, { FC, useRef, useEffect } from 'react'
-const simpleParallax = typeof window !== `undefined` ? require('simple-parallax-js') : null;
+import React, { FC } from 'react'
 import styled from 'styled-components'
+import { HeadingStyle, HeadingLarge } from '../styles/Typography'
 import Icon from '../assets/svg/icon.svg'
 import Logo from '../assets/images/aiscout.svg'
 
@@ -25,7 +24,7 @@ const SlideInner = styled.div`
   left: 0;
   align-items: center;
   flex-wrap: wrap;
-  padding: 6rem 10rem;
+  padding: 0 6vw;
   flex-direction: row;
   color: var(--white);
   height: 100%;
@@ -35,8 +34,14 @@ const SlideInner = styled.div`
 `
 
 const SlideCaption = styled.div`
-  max-width: 620px;
   width: 100%;
+  max-width: 260px;
+  @media screen and (min-width: 1024px) {
+    max-width: 567px;
+  }
+  @media screen and (min-width: 1180px) {
+    max-width: 620px;
+  }
   h2,
   h3 {
     margin: 0 0 2rem;
@@ -47,7 +52,9 @@ const SlideCaption = styled.div`
     margin-bottom: 2rem;
   }
   h3 {
-    font-size: var(--font-large);
+    ${HeadingStyle}
+    ${HeadingLarge}
+    color: var(--white);
   }
   p {
     margin-bottom: 5rem;
@@ -76,7 +83,6 @@ const ImageBannerParallax = ({
   icon = false,
   logo = false,
 }: ParallaxBannerProps): JSX.Element => {
-
   // const ImageRef = useRef<HTMLImageElement>(null);
   // useEffect(() => {
   //   let instance:any;
@@ -90,14 +96,14 @@ const ImageBannerParallax = ({
   // }, []);
 
   return (
-    <ImageBannerStyles style={{backgroundImage: `url(${img})`}}>
+    <ImageBannerStyles style={{ backgroundImage: `url(${img})` }}>
       <SlideInner>
-              <SlideCaption>
-                {icon && <Icon />}
-                {heading && <h3>{heading}</h3>}
-                {text && <p>{text}</p>}
-              </SlideCaption>
-            </SlideInner>
+        <SlideCaption>
+          {icon && <Icon />}
+          {heading && <h3>{heading}</h3>}
+          {text && <p>{text}</p>}
+        </SlideCaption>
+      </SlideInner>
       {logo && <LogoStyles />}
     </ImageBannerStyles>
   )
