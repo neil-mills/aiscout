@@ -57,13 +57,19 @@ const SlideBg = styled.div`
 `
 
 const SlideInner = styled.div`
-  padding: 6vw;
+  padding: 7.6rem 6vw 6vw;
   color: var(--white);
   height: 100%;
   width: 100%;
   position: relative;
   display: block;
   background-color: rgba(0, 0, 0, 0.4);
+  @media screen and (min-width: 1024px) {
+    padding-top: 12.6rem;
+    .on-white & {
+      padding-top: 7.6rem;
+    }
+  }
 `
 const SlideCaptionWrapper = styled.div`
   display: flex;

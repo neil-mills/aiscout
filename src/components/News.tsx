@@ -17,6 +17,13 @@ const NewsSection = styled.section`
   background-color: var(--lightest-grey);
   z-index: 2;
   position: relative;
+  h3,
+  p {
+    padding-right: 6vw;
+  }
+  p {
+    margin-bottom: 0;
+  }
   h3 {
     ${HeadingStyle}
     ${HeadingMedium}

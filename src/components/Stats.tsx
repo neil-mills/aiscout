@@ -6,13 +6,7 @@ const StatsStyles = styled.section`
   display: flex;
   position: relative;
   justify-content: center;
-  padding: 6vw 8vw;
-  @media screen and (min-width: 1024px) {
-    padding: 6vw 9vw;
-  }
-  @media screen and (min-width: 1180px) {
-    padding: 6vw 6vw;
-  }
+  padding: 6vw 4vw;
   z-index: 2;
   background-color: var(--white);
   dl {
@@ -62,9 +56,14 @@ const StatsStyles = styled.section`
           padding: 0 3vw;
         }
       }
-
+      &:first-child {
+        > div {
+          //padding-left: 0;
+        }
+      }
       &:last-child {
-        div {
+        > div {
+          //padding-right: 0;
           &:after {
             display: none;
           }

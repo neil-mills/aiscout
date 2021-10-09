@@ -8,7 +8,13 @@ const ImageBannerStyles = styled.section`
   display: block;
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 520px;
+  /* @media screen and (min-width: 1024px) {
+    height: 760px;
+  } */
+  @media screen and (min-height: 800px) and (max-height: 1000px) {
+    height: 95vh;
+  }
   z-index: 2;
   background-position: center center;
   background-size: cover;
@@ -64,8 +70,8 @@ const SlideCaption = styled.div`
 
 const LogoStyles = styled(Logo)`
   position: absolute;
-  bottom: 6rem;
-  left: 10rem;
+  bottom: 4vw;
+  left: 6vw;
   z-index: 10;
 `
 interface ParallaxBannerProps {

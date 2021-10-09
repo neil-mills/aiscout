@@ -17,7 +17,10 @@ const GlobalStyles = createGlobalStyle`
     --font-xsmall: 1.6rem;
     --font-xsmall-mob: 1.2rem;
   }
-
+  html,
+  body {
+    overflow-x:hidden;
+  }
   html {
     font-size: 10px;
   }

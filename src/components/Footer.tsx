@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import SecondaryNav from './SecondaryNav'
 import SocialNav from './SocialNav'
 import AffiliatesNav from './AffiliatesNav'
@@ -19,7 +20,8 @@ const ImageBanner = styled.section`
   width: 100%;
   height: 458px;
   h3 {
-    font-size: var(--font-medium);
+    ${HeadingStyle}
+    ${HeadingMedium}
     margin-bottom: 1rem;
     color: var(--white);
   }
@@ -48,10 +50,15 @@ const IconStyles = styled(Icon)`
 
 const FooterBottomStyles = styled.section`
   display: grid;
-  padding: 8rem 10rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 24px;
+  padding: 7vw 6vw;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto auto 24px;
   grid-gap: 3rem;
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 24px;
+    grid-gap: 3rem;
+  }
   div:nth-child(2) {
     display: grid;
     justify-content: right;

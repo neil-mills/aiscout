@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken, cssVar } from 'polished';
+import { darken, cssVar } from 'polished'
 
 export const buttonStyles = css`
   height: 48px;
@@ -10,12 +10,12 @@ export const buttonStyles = css`
   cursor: pointer;
   padding: 0 2rem;
   background-color: var(--green);
-  font-size: var(--font-xsmall);
+  font-size: 1.4rem;
   border-radius: 5px;
   text-transform: uppercase;
   font-family: brandon_grotesquebold, sans-serif;
   transition: 0.2s;
-  text-decoration:none;
+  text-decoration: none;
   &:hover,
   &:active,
   &:focus {

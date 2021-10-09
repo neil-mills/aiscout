@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from 'react'
+import React from 'react'
+import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import Button from './Button'
 import styled from 'styled-components'
 import Insta1 from '../assets/images/insta-1.jpg'
@@ -12,14 +13,14 @@ import Insta8 from '../assets/images/insta-8.jpg'
 import Insta9 from '../assets/images/insta-9.jpg'
 
 const IS = styled.section`
-  padding: 12rem 10rem;
+  padding: 7vw 6vw;
   position: relative;
   background-color: var(--white);
   z-index: 2;
   header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6rem;
+    margin-bottom: 6vw;
     p {
       margin: 0;
     }
@@ -29,28 +30,39 @@ const IS = styled.section`
     }
   }
   h3 {
-    font-size: var(--font-medium);
+    ${HeadingStyle}
+    ${HeadingMedium}
     margin-bottom: 1rem;
     flex: 1;
   }
   ul {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, auto);
+    grid-gap: 1rem;
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: 1fr 1fr;
+      grid-gap: 2rem;
+    }
     li {
-      display: block;
-      &:nth-child(3) {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-      }
-      &:nth-child(4) {
-        grid-column: 2 / 3;
-        grid-row: 2 / 3;
-      }
       &:nth-child(5) {
-        grid-column: 3 / 5;
-        grid-row: 1 / 3;
+        grid-column: 1 / 3;
+        grid-row: 3 / 5;
+      }
+      @media screen and (min-width: 1024px) {
+        &:nth-child(3) {
+          grid-column: 1 / 2;
+          grid-row: 2 / 3;
+        }
+        &:nth-child(4) {
+          grid-column: 2 / 3;
+          grid-row: 2 / 3;
+        }
+        &:nth-child(5) {
+          grid-column: 3 / 5;
+          grid-row: 1 / 3;
+        }
       }
       img {
         width: 100%;

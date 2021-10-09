@@ -66,7 +66,7 @@ const TextContainer = styled.div`
   }
   div {
     @media screen and (min-width: 1024px) {
-      max-width: 440px;
+      max-width: 450px;
     }
   }
   h3 {

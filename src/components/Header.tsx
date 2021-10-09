@@ -14,7 +14,10 @@ const HeaderStyles = styled.header`
   padding: 0 6vw;
   background-color: transparent;
   transition: all 400ms ease;
-  height: 126px;
+  height: 76px;
+  @media screen and (min-width: 1024px) {
+    height: 126px;
+  }
   align-items: center;
   justify-content: space-between;
   grid-template-columns: auto 1fr;

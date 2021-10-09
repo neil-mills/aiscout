@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import NottsForest from '../assets/images/NottsForest.png'
 import LUL from '../assets/images/LUL.png'
 import Chelsea from '../assets/images/Chelsea.png'
@@ -13,23 +14,51 @@ import RYFC from '../assets/images/RYFC.png'
 const OS = styled.section`
   position: relative;
   z-index: 2;
-  padding: 12rem 10rem;
+  padding: 8vw 6vw;
   background-color: var(--white);
   h3 {
-    font-size: var(--font-medium);
+    ${HeadingStyle}
+    ${HeadingMedium}
     margin-bottom: 2rem;
+    max-width: 300px;
+    @media screen and (min-width: 1024px) {
+      max-width: 100%;
+    }
   }
-  a, img {
+  a,
+  img {
     display: block;
   }
   ul {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    margin-top: 6vw;
+    grid-gap: 1rem;
     align-items: center;
-    margin-top: 6rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    justify-content: center;
+    align-items: center;
+    @media screen and (min-width: 767px) {
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: auto;
+      grid-gap: 3rem;
+    }
+    a {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      max-height: 70px;
+      height: 100%;
+      @media screen and (min-width: 767px) {
+        max-height: 100px;
+      }
+    }
   }
 `
-const Organisations = () => {
+const Organisations: FC = (): JSX.Element => {
   return (
     <OS>
       <h3>Organisations we work with</h3>
@@ -85,4 +114,4 @@ const Organisations = () => {
   )
 }
 
-export default Organisations;
+export default Organisations
