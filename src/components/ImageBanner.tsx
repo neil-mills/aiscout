@@ -1,5 +1,6 @@
 import React, { FC, useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { HeadingStyle, HeadingLarge, TextXSmall } from '../styles/Typography'
 import Button from './Button'
 import SlideA from '../assets/images/slide-bg.jpg'
 import SlideB from '../assets/images/slide-bg-2.jpg'
@@ -7,15 +8,25 @@ import SlideC from '../assets/images/slide-bg-3.jpg'
 import DownloadNav from './DownloadNav'
 
 const DownloadNavStyles = styled(DownloadNav)`
-  justify-content: flex-end;
-  align-self: flex-end;
+  position: absolute;
+  right: 6vw;
+  bottom: 6vw;
+  @media screen and (max-width: 1023px) {
+    display: none;
+  }
 `
 
 const ImageBannerStyles = styled.section`
   position: relative;
   width: 100%;
   display: block;
-  height: 95vh;
+  height: 600px;
+  @media screen and (min-width: 1024px) {
+    height: 760px;
+  }
+  @media screen and (min-height: 700px) and (max-height: 1000px) {
+    height: 95vh;
+  }
   z-index: 1;
 `
 
@@ -46,59 +57,84 @@ const SlideBg = styled.div`
 `
 
 const SlideInner = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
   padding: 6vw;
-  flex-direction: row;
   color: var(--white);
   height: 100%;
   width: 100%;
+  position: relative;
+  display: block;
   background-color: rgba(0, 0, 0, 0.4);
-  justify-content: space-between;
 `
-
+const SlideCaptionWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+`
 const SlideCaption = styled.div`
-  max-width: 70%;
   width: 100%;
   h2,
   h3 {
+    ${HeadingStyle}
     margin: 0 0 2rem;
     line-height: 110%;
     color: var(--white);
   }
   h2 {
-    font-size: 1.6rem;
+    ${TextXSmall}
   }
   h3 {
-    font-size: var(--font-large);
+    ${HeadingLarge}
   }
   p {
     margin-bottom: 5rem;
-    padding-right: 4rem;
+    padding-right: 2vw;
   }
   &[data-caption='0'] {
     h3 {
-      max-width: 840px;
+      max-width: 300px;
+      @media screen and (min-width: 1024px) {
+        max-width: 840px;
+      }
     }
     p {
-      max-width: 830px;
+      max-width: 310px;
+      @media screen and (min-width: 1024px) {
+        max-width: 830px;
+      }
     }
   }
   &[data-caption='1'] {
     h3 {
-      max-width: 750px;
+      max-width: 380px;
+      @media screen and (min-width: 1024px) {
+        max-width: 750px;
+      }
     }
     p {
-      max-width: 785px;
+      max-width: 360px;
+      @media screen and (min-width: 1024px) {
+        max-width: 785px;
+      }
     }
   }
   &[data-caption='2'] {
     h3 {
-      max-width: 875px;
+      max-width: 300px;
+      @media screen and (min-width: 1024px) {
+        max-width: 867px;
+      }
+      @media screen and (min-width: 1170px) {
+        max-width: 920px;
+      }
     }
     p {
-      max-width: 630px;
+      max-width: 360px;
+      @media screen and (min-width: 1024px) {
+        max-width: 630px;
+      }
     }
   }
 `
@@ -107,7 +143,7 @@ const SlideNav = styled.div`
   justify-content: flex-start;
   position: absolute;
   background-color: transparent;
-  padding: 0 0 4rem 8rem;
+  padding: 0 0 calc(6vw - 2rem) 6vw;
   z-index: 2;
   left: 0;
   bottom: 0;
@@ -246,16 +282,20 @@ const ImageBanner: FC = () => {
             >
               <SlideBg style={{ backgroundImage: `url(${slide.image})` }}>
                 <SlideInner>
-                  <SlideCaption data-caption={index}>
-                    <h2>{slide.subHeading}</h2>
-                    <h3
-                      dangerouslySetInnerHTML={{ __html: slide.heading }}
-                    ></h3>
-                    <p className={index !== 2 ? 'padded' : ''}>{slide.text}</p>
-                    {slide.button && (
-                      <Button link="/get-started">{slide.button}</Button>
-                    )}
-                  </SlideCaption>
+                  <SlideCaptionWrapper>
+                    <SlideCaption data-caption={index}>
+                      <h2>{slide.subHeading}</h2>
+                      <h3
+                        dangerouslySetInnerHTML={{ __html: slide.heading }}
+                      ></h3>
+                      <p className={index !== 2 ? 'padded' : ''}>
+                        {slide.text}
+                      </p>
+                      {slide.button && (
+                        <Button link="/get-started">{slide.button}</Button>
+                      )}
+                    </SlideCaption>
+                  </SlideCaptionWrapper>
                   {slide.downloadLinks && <DownloadNavStyles />}
                 </SlideInner>
               </SlideBg>

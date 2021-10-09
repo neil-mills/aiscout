@@ -17,9 +17,9 @@ const NS = styled.ul`
   }
 `
 
-const DownloadNav = () => {
+const DownloadNav = props => {
   return (
-    <NS>
+    <NS className={props.className}>
       <li>
         <a href="" target="_blank">
           <img src={AppStore} />
