@@ -1,5 +1,6 @@
 import React, { FC, useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import DataIQ from '../assets/images/data-iq-awards.png'
 import WFS from '../assets/images/wfs.png'
 import OutstandingInnovationInitiative from '../assets/images/outstanding-innovation-initiative.png'
@@ -9,22 +10,34 @@ import VideoMP4 from '../assets/video/player-vid.mp4'
 import VideoWebM from '../assets/video/player-vid.webm'
 
 const FeatureBlockStyles = styled.section`
-  padding: 0;
+  padding: 4vw 0;
   position: relative;
   width: 100%;
   z-index: 2;
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+  }
 `
 const FeatureBlockInner = styled.div`
   display: grid;
-  padding: 0;
-  grid-template-columns: 38% 1fr;
-  padding: 0 0 0 6vw;
+  padding: 0 6vw;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 38% 1fr;
+    grid-template-rows: 1fr;
+    padding: 0 0 0 6vw;
+  }
 `
 const ImageContainer = styled.div`
   display: block;
   height: auto;
   position: relative;
   max-width: 495px;
+  margin: 0 auto;
+  @media screen and (min-width: 1024px) {
+    margin: 0;
+  }
   img {
     position: relative;
     display: block;
@@ -33,9 +46,6 @@ const ImageContainer = styled.div`
     z-index: 2;
     left: 50%;
     transform: translate(-50%, 0);
-    /* animation-duration: 18s;
-    animation-name: movePhone;
-    animation-iteration-count: infinite; */
   }
   video {
     height: 100%;
@@ -45,34 +55,23 @@ const ImageContainer = styled.div`
     object-fit: cover;
     display: block;
   }
-  @keyframes movePhone {
-    0% {
-      left: 61%;
-    }
-    20% {
-      left: 61%;
-    }
-    50% {
-      left: 38%;
-    }
-    100% {
-      left: 38%;
-    }
-  }
 `
 const TextContainer = styled.div`
-  padding: 0 3vw 0 0;
   display: flex;
+  padding: 6vw 0 0;
   align-items: center;
   justify-content: center;
+  @media screen and (min-width: 1024px) {
+    padding: 0 3vw 0 0;
+  }
   div {
-    max-width: 440px;
+    @media screen and (min-width: 1024px) {
+      max-width: 440px;
+    }
   }
   h3 {
-    font-size: var(--font-medium-mob);
-    @media screen and (min-width: 1100px) {
-      font-size: var(--font-medium);
-    }
+    ${HeadingStyle}
+    ${HeadingMedium}
     margin-bottom: 3rem;
   }
   p {
@@ -85,6 +84,13 @@ const TextContainer = styled.div`
     img {
       display: block;
     }
+  }
+`
+const LeftColumn = styled.div`
+  padding: 0 3rem;
+  display: block;
+  @media screen and (min-width: 1024px) {
+    padding: 0;
   }
 `
 const Video = styled.div`
@@ -139,23 +145,25 @@ const FeatureBlock: FC = (): JSX.Element => {
   return (
     <FeatureBlockStyles>
       <FeatureBlockInner>
-        <ImageContainer>
-          <img src={IPhone} />
-          <Video>
-            <video
-              ref={videoRef}
-              loop={true}
-              style={{ backgroundImage: `url(${BgImage})` }}
-              muted={true}
-              playsInline={true}
-              data-wf-ignore="true"
-              data-object-fit="cover"
-            >
-              <source src={VideoMP4} data-wf-ignore="true" />
-              <source src={VideoWebM} data-wf-ignore="true" />
-            </video>
-          </Video>
-        </ImageContainer>
+        <LeftColumn>
+          <ImageContainer>
+            <img src={IPhone} />
+            <Video>
+              <video
+                ref={videoRef}
+                loop={true}
+                style={{ backgroundImage: `url(${BgImage})` }}
+                muted={true}
+                playsInline={true}
+                data-wf-ignore="true"
+                data-object-fit="cover"
+              >
+                <source src={VideoMP4} data-wf-ignore="true" />
+                <source src={VideoWebM} data-wf-ignore="true" />
+              </video>
+            </Video>
+          </ImageContainer>
+        </LeftColumn>
         <TextContainer>
           <div>
             <h3>Award winning, proven technology</h3>

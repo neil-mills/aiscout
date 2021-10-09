@@ -1,21 +1,29 @@
 import React, { FC, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-
+import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import BgImage from '../assets/images/auto-platform-img.jpg'
 import Player from '../assets/images/player.png'
 
 const FeatureBlockStyles = styled.section`
-  padding: 0;
+  padding: 4vw 0 0;
   position: relative;
   background-color: transparent;
   z-index: 2;
-  margin-top: -4rem;
+  @media screen and (min-width: 1024px) {
+    margin-top: -4rem;
+    padding: 0;
+  }
 `
 
 const FeatureBlockInner = styled.div`
   display: grid;
   padding: 0;
-  grid-template-columns: 38% 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 38% 1fr;
+    grid-template-rows: 1fr;
+  }
   align-items: center;
   padding: 0 0 0 6vw;
 
@@ -41,6 +49,12 @@ const ImageContainer = styled.div`
     margin: 0;
   }
 `
+const ImageColumn = styled.div`
+  order: 1;
+  @media screen and (min-width: 1024px) {
+    order: 2;
+  }
+`
 
 const COImageContainer = styled.div`
   width: auto;
@@ -56,23 +70,32 @@ const COImageContainer = styled.div`
   }
 `
 const TextContainer = styled.div`
-  padding: 0;
+  padding: 5rem 0 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  order: 2;
+  padding-right: 6vw;
+  @media screen and (min-width: 1024px) {
+    order: 1;
+    padding-right: 0;
+  }
   div {
-    width: 80%;
+    width: 100%;
+    @media screen and (min-width: 1380px) {
+      width: 80%;
+    }
   }
   h3 {
-    font-size: var(--font-medium-mob);
-    @media screen and (min-width: 1100px) {
-      font-size: var(--font-medium);
-    }
-    margin-bottom: 3rem;
+    ${HeadingStyle}
+    ${HeadingMedium}
+margin-bottom: 3rem;
   }
   p {
     margin-bottom: 3rem;
-
+    @media screen and (min-width: 1024px) {
+      padding-right: 1rem;
+    }
     &:last-of-type {
       margin: 0;
     }
@@ -122,14 +145,14 @@ const FeatureBlockTwo: FC = () => {
           </div>
         </TextContainer>
 
-        <div>
+        <ImageColumn>
           <ImageContainer ref={imageContainerRef}>
             <COImageContainer ref={imageRef}>
               <img src={Player} />
             </COImageContainer>
             <img src={BgImage} />
           </ImageContainer>
-        </div>
+        </ImageColumn>
       </FeatureBlockInner>
     </FeatureBlockStyles>
   )
