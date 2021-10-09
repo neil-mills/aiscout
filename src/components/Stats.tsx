@@ -1,35 +1,65 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import styled, { StyledComponent } from 'styled-components'
+import styled from 'styled-components'
+import { HeadingStyle, HeadingLarge } from '../styles/Typography'
 
 const StatsStyles = styled.section`
   display: flex;
   position: relative;
   justify-content: center;
-  padding: 12rem 8rem 8rem;
+  padding: 6vw 8vw;
+  @media screen and (min-width: 1024px) {
+    padding: 6vw 9vw;
+  }
+  @media screen and (min-width: 1180px) {
+    padding: 6vw 6vw;
+  }
   z-index: 2;
   background-color: var(--white);
   dl {
     display: grid;
-    grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    width: 210px;
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+      grid-template-rows: auto;
+      width: 100%;
+    }
     justify-content: center;
     text-align: center;
-    width: 100%;
-    max-width: 1400px;
+
     margin: 0;
     & > div {
       div {
         position: relative;
-        padding: 0 6rem;
+        padding: 4rem 0;
         &:after {
           content: '';
           position: absolute;
-          top: 0;
+          top: auto;
           right: 0;
           bottom: 0;
-          width: 1px;
-          height: 100%;
+          width: 100%;
+          height: 1px;
           display: block;
           background-color: var(--light-grey);
+        }
+        @media screen and (min-width: 1024px) {
+          padding: 0 4vw;
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            height: 100%;
+            display: block;
+            background-color: var(--light-grey);
+          }
+        }
+        @media screen and (min-width: 1180px) {
+          padding: 0 3vw;
         }
       }
 
@@ -43,15 +73,20 @@ const StatsStyles = styled.section`
     }
   }
   dt {
-    color: var(--black);
-    font-size: var(--font-large);
+    ${HeadingStyle}
+    font-size: var(--font-medium);
     margin-bottom: 2rem;
-    font-family: brandon_grotesquebold;
-    font-weight: 400;
     line-height: 1;
+    @media screen and (min-width: 1024px) {
+      font-size: var(--font-large);
+    }
   }
   dd {
     margin: 0;
+    padding: 0 2rem;
+    @media screen and (min-width: 1024px) {
+      padding: 0;
+    }
   }
 `
 
