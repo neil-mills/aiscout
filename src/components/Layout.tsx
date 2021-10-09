@@ -20,7 +20,7 @@ export const Layout: FC = ({ children }): JSX.Element => {
 
   const handleOnScroll = () => {
     if (headerRef.current && content) {
-      const offset: number = headerRef.current?.offsetHeight / 2
+      const offset: number = headerRef.current?.offsetHeight - 20
       if (offset >= content.getBoundingClientRect().top) {
         headerRef.current.classList.add('on-white')
       } else {
