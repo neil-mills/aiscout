@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { HeadingStyle, HeadingLarge } from '../styles/Typography'
 import Icon from '../assets/svg/icon.svg'
@@ -9,14 +9,12 @@ const ImageBannerStyles = styled.section`
   position: relative;
   width: 100%;
   height: 520px;
-  /* @media screen and (min-width: 1024px) {
-    height: 760px;
-  } */
+  opacity: 0;
   @media screen and (min-height: 800px) and (max-height: 1000px) {
     height: 95vh;
   }
   z-index: 2;
-  background-position: center center;
+  background-position: right center;
   background-size: cover;
   background-attachment: fixed;
 `
@@ -75,34 +73,66 @@ const LogoStyles = styled(Logo)`
   z-index: 10;
 `
 interface ParallaxBannerProps {
-  img: string
+  imgLg: string
+  imgSm?: string
   heading?: string
+  breakpoint?: number
   text?: string
   icon?: boolean
   logo?: boolean
 }
 
 const ImageBannerParallax = ({
-  img,
+  imgLg,
+  imgSm,
   heading,
+  breakpoint = 900,
   text,
   icon = false,
   logo = false,
 }: ParallaxBannerProps): JSX.Element => {
-  // const ImageRef = useRef<HTMLImageElement>(null);
-  // useEffect(() => {
-  //   let instance:any;
-  //   if(ImageRef.current) {
-  //     instance = new simpleParallax(ImageRef.current,{
-  //     })
-  //   }
-  //   return () => {
-  //       instance.destroy();
-  //   }
-  // }, []);
+  const [bgSrc, setBgSrc] = useState<string>(null)
+  const bgRef = useRef<HTMLDivElement>(null)
+
+  const handleResize = () => {
+    console.log(window.innerWidth)
+    console.log('small img=', imgSm)
+    console.log('lrg img=', imgLg)
+    const bg: string = window.innerWidth < breakpoint && imgSm ? imgSm : imgLg
+    console.log('bg=', bg)
+    if (bg && bg !== bgSrc && bgRef.current) {
+      bgRef.current.style.backgroundImage = `url(${bg})`
+      setBgSrc(bg)
+    }
+  }
+
+  const preloadImages = () => {
+    let allImages: string[] = [imgLg]
+    let loaded = 0
+    if (imgSm) allImages = [imgSm, ...allImages]
+    allImages.forEach(imgSrc => {
+      const img = new Image()
+      img.src = imgSrc
+      img.onload = () => {
+        loaded++
+        if (loaded === allImages.length && bgRef.current) {
+          handleResize()
+          window.addEventListener('resize', handleResize)
+          bgRef.current.style.opacity = '1'
+        }
+      }
+    })
+  }
+
+  useEffect(() => {
+    preloadImages()
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
-    <ImageBannerStyles style={{ backgroundImage: `url(${img})` }}>
+    <ImageBannerStyles ref={bgRef} style={{ backgroundImage: `url(${bgSrc})` }}>
       <SlideInner>
         <SlideCaption>
           {icon && <Icon />}
