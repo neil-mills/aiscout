@@ -14,6 +14,7 @@ import ParallaxImg2 from '../assets/images/paralax-img-2.jpg'
 import ParallaxImg2Sm from '../assets/images/parallax-img-2-sm.jpg'
 import Instagram from '../components/Instagram'
 import HexBg from '../assets/images/hex-bg.png'
+import MobileMenu from '../components/MobileMenu'
 
 const FeatureBlockWrapper = styled.div`
   background-color: var(--lightest-grey);
@@ -28,6 +29,7 @@ const FeatureBlockWrapper = styled.div`
 const HomePage = ({ data }) => {
   return (
     <>
+      <MobileMenu />
       <ImageBanner />
       <div id="content">
         <FeatureBlockWrapper>
