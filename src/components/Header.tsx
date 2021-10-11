@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import Logo from '../assets/images/aiscout.svg'
 import Nav from './Nav'
 import styled from 'styled-components'
-
+import MobileMenu from './MobileMenu'
 const HeaderStyles = styled.header`
   position: fixed;
   top: 0;
@@ -42,12 +42,15 @@ const LogoStyles = styled(Link)`
 `
 const Header = React.forwardRef((props, ref) => {
   return (
-    <HeaderStyles id="header" ref={ref}>
-      <LogoStyles aria-current="page" to="">
-        <Logo id="logo" />
-      </LogoStyles>
-      <Nav />
-    </HeaderStyles>
+    <>
+      <HeaderStyles id="header" ref={ref}>
+        <LogoStyles aria-current="page" to="">
+          <Logo id="logo" />
+        </LogoStyles>
+        <Nav />
+      </HeaderStyles>
+      <MobileMenu />
+    </>
   )
 })
 

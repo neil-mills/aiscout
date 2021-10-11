@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import Facebook from '../assets/images/facebook.svg';
-import Instagram from '../assets/images/instagram.svg';
-import Linkedin from '../assets/images/linkedin.svg';
-import Twitter from '../assets/images/twitter-square.svg';
-import styled from 'styled-components';
+import Facebook from '../assets/images/facebook.svg'
+import Instagram from '../assets/images/instagram.svg'
+import Linkedin from '../assets/images/linkedin.svg'
+import Twitter from '../assets/images/twitter-square.svg'
+import styled from 'styled-components'
 
 const SocialNavStyles = styled.nav`
   ul {
@@ -12,20 +12,35 @@ const SocialNavStyles = styled.nav`
     justify-content: flex-start;
     gap: 1rem;
   }
-`;
+`
 
-
-const SocialNav:FC = ():JSX.Element => {
+const SocialNav: FC = (props): JSX.Element => {
   return (
-    <SocialNavStyles>
+    <SocialNavStyles className={props.className}>
       <ul>
-        <li><a href="" target="_blank"><Instagram /></a></li>
-        <li><a href="" target="_blank"><Facebook /></a></li>
-        <li><a href="" target="_blank"><Linkedin /></a></li>
-        <li><a href="" target="_blank"><Twitter /></a></li>
+        <li>
+          <a href="" target="_blank">
+            <Instagram />
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <Facebook />
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <Linkedin />
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <Twitter />
+          </a>
+        </li>
       </ul>
     </SocialNavStyles>
   )
 }
 
-export default SocialNav;
+export default SocialNav

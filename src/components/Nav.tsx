@@ -1,5 +1,5 @@
+import React, { FC, useState, useEffect } from 'react'
 import { Link } from 'gatsby'
-import React, { FC } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 
@@ -70,27 +70,62 @@ const MenuButtonStyles = styled.button`
     position: absolute;
     width: 20px;
     height: 2px;
-    left: 10px;
+    transform-origin: 0 50%;
+    opacity: 1;
+    transition: all 200ms ease;
+    will-change: opacity;
     background-color: var(--white);
     .on-white & {
       background-color: var(--black);
     }
     &:nth-child(1) {
       top: 10px;
+      left: 10px;
     }
     &:nth-child(2) {
+      left: 10px;
       top: 50%;
-      transform: translate(0, -50%);
+      transform: translateY(-50%);
     }
     &:nth-child(3) {
+      left: 10px;
       bottom: 10px;
+    }
+  }
+  &[aria-expanded='true'] {
+    span {
+      &:nth-child(1) {
+        transform: rotate(45deg);
+        width: 26px;
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        width: 26px;
+        transform: rotate(-45deg);
+      }
     }
   }
 `
 
 const MenuButton: FC = () => {
+  const [expanded, setExpanded] = useState<boolean>(false)
+  const handleClick = () => {
+    setExpanded(currentState => !currentState)
+  }
+  const setNoScroll = () => {
+    if (expanded) {
+      document.querySelector('body')?.setAttribute('data-noscroll', 'true')
+    } else {
+      document.querySelector('body')?.removeAttribute('data-noscroll')
+    }
+  }
+  useEffect(() => {
+    setNoScroll()
+  }, [expanded])
   return (
-    <MenuButtonStyles>
+    <MenuButtonStyles aria-expanded={expanded} onClick={handleClick}>
       <span></span>
       <span></span>
       <span></span>

@@ -8,7 +8,7 @@ export const buttonStyles = css`
   line-height: 48px;
   color: var(--white);
   cursor: pointer;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   background-color: var(--green);
   font-size: 1.4rem;
   border-radius: 5px;

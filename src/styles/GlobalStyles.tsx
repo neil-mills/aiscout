@@ -20,9 +20,11 @@ const GlobalStyles = createGlobalStyle`
   html,
   body {
     overflow-x:hidden;
+    
   }
   html {
     font-size: 10px;
+    height: 100%;
   }
 
   body {
@@ -31,6 +33,10 @@ const GlobalStyles = createGlobalStyle`
     @media screen and (min-width: 1024px) {
       font-size: var(--font-small);
       line-height: 2.8rem;
+    }
+    &[data-noscroll='true'] {
+      overflow-y: hidden;
+      height: 100%;
     }
   }
 
