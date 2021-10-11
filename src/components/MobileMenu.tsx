@@ -61,7 +61,8 @@ const MobileNav = styled.nav`
 const MobileMenu: FC = (): JSX.Element => {
   return (
     <MobileMenuStyles>
-      <MobileMenuInner>
+      <p>Mobile menu</p>
+      {/* <MobileMenuInner>
         <MobileNav>
           <ul>
             <li>
@@ -100,7 +101,7 @@ const MobileMenu: FC = (): JSX.Element => {
           </p>
           <SocialNav />
         </footer>
-      </MobileMenuInner>
+      </MobileMenuInner> */}
     </MobileMenuStyles>
   )
 }
