@@ -11,9 +11,12 @@ const AffiliatesNavStyles = styled.nav`
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 2rem;
     width: 100%;
+    @media screen and (min-width: 1024px) {
+      justify-content: flex-end;
+    }
   }
   li {
     margin: 0;
@@ -26,39 +29,36 @@ const AffiliatesNavStyles = styled.nav`
     display: block;
     height: 100%;
     max-height: 45px;
-
   }
 `
 
-const AffiliatesNav = () => {
+const AffiliatesNav: FC = props => {
   return (
-    <>
-      <AffiliatesNavStyles>
-        <ul>
-          <li>
-            <a href="">
-             <img src={Intel} />
-            </a>
-          </li>
-          
-          <li>
-            <a href="">
-             <img src={LUL} />
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={Burnley} />
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src={Chelsea} />
-            </a>
-          </li>
-        </ul>
-      </AffiliatesNavStyles>
-    </>
+    <AffiliatesNavStyles className={props.className}>
+      <ul>
+        <li>
+          <a href="">
+            <img src={Intel} />
+          </a>
+        </li>
+
+        <li>
+          <a href="">
+            <img src={LUL} />
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src={Burnley} />
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src={Chelsea} />
+          </a>
+        </li>
+      </ul>
+    </AffiliatesNavStyles>
   )
 }
 

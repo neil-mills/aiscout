@@ -18,18 +18,28 @@ const ImageBanner = styled.section`
   background-position: center center;
   background-size: cover;
   width: 100%;
-  height: 458px;
+  @media screen and (min-width: 1024px) {
+    height: 458px;
+  }
   h3 {
     ${HeadingStyle}
     ${HeadingMedium}
     margin-bottom: 1rem;
     color: var(--white);
+    max-width: 200px;
+    @media screen and (min-width: 1024px) {
+      max-width: 100%;
+    }
   }
   p {
     margin-bottom: 4rem;
+    max-width: 250px;
+    @media screen and (min-width: 1024px) {
+      max-width: 100%;
+    }
   }
   & > div {
-    padding: 0 6vw;
+    padding: 10vw 6vw;
     display: grid;
     height: 100%;
     background: linear-gradient(
@@ -38,8 +48,17 @@ const ImageBanner = styled.section`
       rgba(0, 0, 0, 0) 100%
     );
     grid-gap: 1rem;
-    grid-template-columns: 1fr auto;
-    align-items: center;
+    grid-template-columns: 1fr 32px;
+    align-items: top;
+    @media screen and (min-width: 1024px) {
+      padding: 0 6vw;
+      grid-template-columns: 1fr 88px;
+      align-items: center;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+    }
   }
 `
 
@@ -51,8 +70,7 @@ const IconStyles = styled(Icon)`
 const FooterBottomStyles = styled.section`
   display: grid;
   padding: 7vw 6vw;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto auto 24px;
+  grid-template-rows: auto auto 24px;
   grid-gap: 3rem;
   @media screen and (min-width: 1024px) {
     grid-template-columns: 1fr 1fr;
@@ -60,18 +78,50 @@ const FooterBottomStyles = styled.section`
     grid-gap: 3rem;
   }
   div:nth-child(2) {
-    display: grid;
-    justify-content: right;
-    div {
-      max-width: 500px;
-      text-align: right;
+    > div {
+      display: grid;
+      grid-template-rows: auto auto;
+      p {
+        order: 1;
+        margin: ;
+      }
+      nav {
+        order: 0;
+      }
+      @media screen and (min-width: 1024px) {
+        p {
+          order: 0;
+        }
+        nav {
+          order: 1;
+        }
+      }
     }
   }
-  div:nth-child(3) {
-    grid-column: span 2;
+  @media screen and (min-width: 1024px) {
+    div:nth-child(2) {
+      display: grid;
+      justify-content: right;
+      div {
+        max-width: 500px;
+        text-align: right;
+      }
+    }
+    div:nth-child(3) {
+      grid-column: span 2;
+    }
   }
 `
-
+const AffiliatesNavFooter = styled(AffiliatesNav)`
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 2rem;
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+`
 const Footer: FC = (): JSX.Element => {
   return (
     <FooterStyles>
@@ -98,7 +148,7 @@ const Footer: FC = (): JSX.Element => {
               Developed with assistance from Chelsea FC, Burnley FC,
               Loughborough University London &amp; IBM
             </p>
-            <AffiliatesNav />
+            <AffiliatesNavFooter />
           </div>
         </div>
         <div>
