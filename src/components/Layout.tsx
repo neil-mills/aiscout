@@ -8,6 +8,7 @@
 import React, { FC, useRef, useLayoutEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import MobileMenu from './MobileMenu'
 import 'normalize.css'
 import GlobalStyles from '../styles/GlobalStyles'
 import Typography from '../styles/Typography'
@@ -47,6 +48,7 @@ export const Layout: FC = ({ children }): JSX.Element => {
       <GlobalStyles />
       <Typography />
       <Header ref={headerRef} />
+      <MobileMenu />
       <main id="main">{children}</main>
       <Footer />
     </>
