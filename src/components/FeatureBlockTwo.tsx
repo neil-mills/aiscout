@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { HeadingStyle, HeadingMedium } from '../styles/Typography'
 import BgImage from '../assets/images/auto-platform-img.jpg'
@@ -110,21 +110,32 @@ margin-bottom: 3rem;
   }
 `
 const FeatureBlockTwo: FC = () => {
-  const imageRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLImageElement>(null)
+  const bgImageRef = useRef<HTMLImageElement>(null)
   const imageContainerRef = useRef<HTMLDivElement>(null)
+  const [imageWidth, setImageWidth] = useState<number>(0)
 
   const handleResize = () => {
-    const height: number = imageRef.current ? imageRef.current.clientHeight : 0
-    const padding: number = (height / 100) * 30
+    const width: number = imageRef.current ? imageRef.current.width : 0
+    const padding: number = (width / 100) * 56
     if (imageContainerRef.current) {
       imageContainerRef.current.style.paddingLeft = `${padding}px`
+    }
+    if (imageRef.current) {
+      setImageWidth(imageRef.current.width)
+    }
+  }
+
+  const handleImageLoaded = () => {
+    if (imageRef.current) {
+      handleResize()
+      window.addEventListener('resize', handleResize)
     }
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
     handleResize()
-  }, [])
+  }, [imageWidth])
 
   return (
     <FeatureBlockStyles>
@@ -144,13 +155,16 @@ const FeatureBlockTwo: FC = () => {
             </p>
           </div>
         </TextContainer>
-
         <ImageColumn>
           <ImageContainer ref={imageContainerRef}>
-            <COImageContainer ref={imageRef}>
-              <img src={Player} />
+            <COImageContainer>
+              <img
+                src={Player}
+                onLoad={() => handleImageLoaded()}
+                ref={imageRef}
+              />
             </COImageContainer>
-            <img src={BgImage} />
+            <img src={BgImage} ref={bgImageRef} />
           </ImageContainer>
         </ImageColumn>
       </FeatureBlockInner>
