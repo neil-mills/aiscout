@@ -5,18 +5,20 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { FC, useRef, useLayoutEffect } from 'react'
+import React, { FC, useRef, useLayoutEffect, useContext } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import MobileMenu from './MobileMenu'
 import 'normalize.css'
 import GlobalStyles from '../styles/GlobalStyles'
 import Typography from '../styles/Typography'
-
+import Lightbox from './Lightbox'
 import './layout.css'
+import SiteContext from '../context/SiteContext'
+import Helmet from 'react-helmet'
 
 export const Layout: FC = ({ children }): JSX.Element => {
   const headerRef = useRef<HTMLHeadingElement>(null)
+  const { lightbox, noScroll } = useContext(SiteContext)
   let content: HTMLElement | null = null
 
   const handleOnScroll = () => {
@@ -47,8 +49,9 @@ export const Layout: FC = ({ children }): JSX.Element => {
     <>
       <GlobalStyles />
       <Typography />
+      <Helmet bodyAttributes={{ 'data-noscroll': noScroll }} />
+      <Lightbox />
       <Header ref={headerRef} />
-      <MobileMenu />
       <main id="main">{children}</main>
       <Footer />
     </>
