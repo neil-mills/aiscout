@@ -7,7 +7,9 @@ export const HeadingStyle = css`
   font-family: brandon_grotesquebold;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
+  @media screen and (min-width: 1024px) {
+    letter-spacing: 0.1rem;
+  }
   color: var(--black);
   span {
     text-transform: lowercase;

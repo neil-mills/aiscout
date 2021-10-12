@@ -36,7 +36,8 @@ const GlobalStyles = createGlobalStyle`
     }
     &[data-noscroll='true'] {
       overflow-y: hidden;
-      height: 100%;
+      position: fixed;
+      //height: 100%;
     }
   }
 
