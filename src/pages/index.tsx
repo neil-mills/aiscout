@@ -6,7 +6,7 @@ import FeatureBlock from '../components/FeatureBlock'
 import FeatureBlockTwo from '../components/FeatureBlockTwo'
 import Stats from '../components/Stats'
 import ImageBannerParallax from '../components/ImageBannerParallax'
-import News from '../components/News'
+import PlayersSuccess from '../components/PlayersSuccess'
 import Organisations from '../components/Organisations'
 import ParallaxImg1 from '../assets/images/paralax-img-1.jpg'
 import ParallaxImg1Sm from '../assets/images/parallax-img-1-sm.jpg'
@@ -44,7 +44,7 @@ const HomePage = ({ data }) => {
           text={'All you need is a mobile phone.'}
           icon={true}
         />
-        <News />
+        <PlayersSuccess />
         <Organisations />
         <ImageBannerParallax
           imgLg={ParallaxImg2}
