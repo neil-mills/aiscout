@@ -41,10 +41,10 @@ const ImageContainer = styled.div`
   position: relative;
 
   img {
-    object-fit: cover;
-    object-position: 100% 50%;
+    //object-fit: cover;
+    // object-position: 100% 50%;
     width: 100%;
-    height: 100%;
+    height: auto;
     display: block;
     margin: 0;
   }
@@ -66,7 +66,7 @@ const COImageContainer = styled.div`
   z-index: 2;
   img {
     height: 100%;
-    margin-left: --10rem;
+    width: auto;
   }
 `
 const TextContainer = styled.div`
@@ -117,6 +117,7 @@ const FeatureBlockTwo: FC = () => {
 
   const handleResize = () => {
     const width: number = imageRef.current ? imageRef.current.width : 0
+    console.log('width=', width)
     const padding: number = (width / 100) * 56
     if (imageContainerRef.current) {
       imageContainerRef.current.style.paddingLeft = `${padding}px`
