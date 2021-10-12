@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import SocialNav from './SocialNav'
 import Button from './Button'
 import { HeadingStyle } from '../styles/Typography'
+import SiteContext from '../context/SiteContext'
 
 const MobileMenuStyles = styled.div`
   position: fixed;
@@ -58,7 +59,9 @@ const MobileNav = styled.nav`
   }
 `
 
-const MobileMenu: FC = (): JSX.Element => {
+const MobileMenu: FC = (): JSX.Element | null => {
+  const { showMobileMenu } = useContext(SiteContext)
+  if (!showMobileMenu) return null
   return (
     <MobileMenuStyles>
       <MobileMenuInner>

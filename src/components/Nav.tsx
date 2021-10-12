@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import Button from './Button'
+import SiteContext from '../context/SiteContext'
 
 const NavStyles = styled.nav`
   display: none;
@@ -110,20 +111,18 @@ const MenuButtonStyles = styled.button`
 `
 
 const MenuButton: FC = () => {
+  const { setSiteContext } = useContext(SiteContext)
   const [expanded, setExpanded] = useState<boolean>(false)
   const handleClick = () => {
     setExpanded(currentState => !currentState)
   }
-  const setNoScroll = () => {
-    if (expanded) {
-      document.querySelector('body')?.setAttribute('data-noscroll', 'true')
-    } else {
-      document.querySelector('body')?.removeAttribute('data-noscroll')
-    }
-  }
+
   useEffect(() => {
-    setNoScroll()
+    if (setSiteContext) {
+      setSiteContext({ noScroll: expanded, showMobileMenu: expanded })
+    }
   }, [expanded])
+
   return (
     <MenuButtonStyles aria-expanded={expanded} onClick={handleClick}>
       <span></span>
